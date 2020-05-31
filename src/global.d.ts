@@ -39,11 +39,11 @@ declare interface GameObject {
 
 type AIHandlers = typeof import("./ai");
 
-declare type AIHandler<State> = (self: GameObject, state: State) => void;
-
 declare type AI = {
-  [K in keyof AIHandlers]: { type: K } & (
-    AIHandlers[K] extends AIHandler<infer State> ? State : {}
+  [K in keyof AIHandlers]: (
+    Parameters<AIHandlers[K]> extends [GameObject, infer State]
+      ? ({ type: K } & State)
+      : ({ type: K } | K)
   )
 }[keyof AIHandlers];
 

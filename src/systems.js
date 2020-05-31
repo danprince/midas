@@ -172,9 +172,10 @@ export class AISystem extends System {
       }
 
       if (object.ai) {
-        let handler = /** @type {AIHandler<any>} */(AIHandlers[object.ai.type]);
-        let ai = /** @type {AI} */(object.ai);
-        handler(object, ai);
+        let name = typeof object.ai === "string" ? object.ai : object.ai.type;
+        let handler = AIHandlers[name];
+        let state = /** @type {any} */(object.ai);
+        handler(object, state);
       }
     }
   }
