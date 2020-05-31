@@ -26,7 +26,7 @@ declare interface GameObject {
   coins?: number,
   ai?: AI,
   stun?: number,
-  behaviour?: Behaviour<any>,
+  transmuted?: boolean,
   canJump?: boolean,
   canAttack?: boolean,
   canBeAttacked?: boolean,
@@ -34,6 +34,7 @@ declare interface GameObject {
   canBePushed?: boolean,
   canCrush?: boolean,
   canBeCrushed?: boolean,
+  canBeTransmuted?: boolean,
 }
 
 type AIHandlers = typeof import("./ai");

@@ -70,12 +70,8 @@ export function move(object, dx, dy) {
 
   // Midas turns blocks gold
   if (object === game.player && target) {
-    switch (target.sprite) {
-      case 30:
-      case 32:
-      case 34:
-        target.sprite += 1;
-        break;
+    if (target.canBeTransmuted && !target.transmuted) {
+      transmute(target);
     }
   }
 
@@ -169,4 +165,12 @@ export function goldify(x, y) {
   }
 
   systems.audio.play("coins");
+}
+
+/**
+ * @param {GameObject} object
+ */
+export function transmute(object) {
+  object.sprite += 1;
+  object.transmuted = true;
 }
