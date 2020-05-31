@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "cweb";
+  src: url("fonts/CWEBL.TTF");
+}
+
+body {
+  font-family: cweb;
+  color: white;
+  font-size: 28px;
+  background: #141722;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  image-rendering: pixelated;
+  user-select: none;
+}
+
+#viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#viewport canvas {
+  display: block;
+  transform-origin: top left;
+  cursor: none;
+  position: absolute;
+}
+
+.bottom {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.top {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.stats {
+  padding: 10px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 1);
+  background: rgba(0, 0, 0, 0.8);
+  overflow: visible;
+  height: 20px;
+  border-bottom: solid 3px #1c2033;
+}
+
+.stats-center {
+  display: flex;
+  transform: scale(3);
+  transform-origin: center center;
+  padding: 0 5px;
+}
+
+.stats-left {
+  transform: scale(3);
+  transform-origin: left center;
+}
+
+.stats-right {
+  transform: scale(3);
+  transform-origin: right center;
+  display: flex;
+  padding: 0 5px;
+}
+
+.stats-center .stats-column {
+  margin: 0 4px;
+}
+
+.stats-column {
+  display: flex;
+  align-items: center;
+}
+
+.outline {
+  text-shadow: 0 0.6px black, 0.6px 0 black, -0.6px 0 black, 0 -0.6px black;
+}
+
+#current-face {
+  position: relative;
+  bottom: -3px;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.changed {
+  animation: 1s pop;
+}
+
+.tooltip {
+  position: fixed;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 3px 3px #151823;
+  border: solid 3px #8888ae;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}

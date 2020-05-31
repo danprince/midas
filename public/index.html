@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Midas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="theme-color" content="#c99c0b">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div id="viewport">
+      <canvas id="renderer"></canvas>
+    </div>
+    <div class="top stats">
+      <div class="stats-left">
+        <div class="stats-column">
+          <img id="current-face" src="/assets/midas_face_1.png" />
+          <span class="outline" id="current-coins">0</span>
+        </div>
+      </div>
+      <div class="stats-center">
+        <div class="stats-column">
+          <img src="/assets/icon_sanity.png" />
+          <span class="outline" id="current-sanity">15</span>
+        </div>
+        <div class="stats-column">
+          <img src="/assets/icon_heart.png" />
+          <span class="outline" id="current-health">12</span>
+        </div>
+        <div class="stats-column">
+          <img src="/assets/icon_coin.png" />
+        </div>
+      </div>
+      <div class="stats-right">
+      </div>
+    </div>
+    <script type="module" src="/_dist_/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "**/*.d.ts",
+    "**/*.js"
+  ]
+}
