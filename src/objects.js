@@ -27,10 +27,9 @@ export function medusa() {
     h: 2,
     shadow: true,
     hp: 3,
-    //ai: true,
-    behaviour: {
+    ai: {
       type: "medusa",
-      state: { dx: -1, dy: 0 }
+      direction: [-1, 0],
     },
     mobile: true,
     canBeCrushed: true,

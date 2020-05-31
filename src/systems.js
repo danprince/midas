@@ -3,7 +3,7 @@ import { distance } from "silmarils/point";
 
 import config from "./config.js";
 import * as Actions from "./actions.js";
-import * as Behaviours from "./behaviours.js";
+import * as AIHandlers from "./ai.js";
 
 export class System {
   constructor() {
@@ -171,25 +171,10 @@ export class AISystem extends System {
         continue;
       }
 
-      if (object.behaviour) {
-        let handler = Behaviours[object.behaviour.type];
-
-        handler(
-          object,
-          object.behaviour.state,
-          object.behaviour.params,
-        );
-      }
-
-      else if (object.ai) {
-        let [dx, dy] = RNG.item(
-          [-1, 0],
-          [+1, 0],
-          [0, -1],
-          [0, +1],
-        )
-
-        Actions.move(object, dx, dy);
+      if (object.ai) {
+        let handler = /** @type {AIHandler<any>} */(AIHandlers[object.ai.type]);
+        let ai = /** @type {AI} */(object.ai);
+        handler(object, ai);
       }
     }
   }

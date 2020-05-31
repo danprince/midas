@@ -41,7 +41,7 @@ export function sandbox() {
       y,
       shadow: true,
       hp: 3,
-      ai: true,
+      ai: { type: "wander" },
       mobile: true,
       canBeCrushed: true,
       canBeAttacked: true,

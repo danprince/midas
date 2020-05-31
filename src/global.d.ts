@@ -24,7 +24,7 @@ declare interface GameObject {
   mobile?: boolean,
   hp?: number,
   coins?: number,
-  ai?: boolean,
+  ai?: AI,
   stun?: number,
   behaviour?: Behaviour<any>,
   canJump?: boolean,
@@ -36,19 +36,15 @@ declare interface GameObject {
   canBeCrushed?: boolean,
 }
 
-type BehaviourName = keyof typeof import("./behaviours");
+type AIHandlers = typeof import("./ai");
 
-type GetBehaviourState<Name extends BehaviourName> =
-  Parameters<typeof import("./behaviours")[Name]>[1];
+declare type AIHandler<State> = (self: GameObject, state: State) => void;
 
-type GetBehaviourParams<Name extends BehaviourName> =
-  Parameters<typeof import("./behaviours")[Name]>[2];
-
-declare interface Behaviour<Name extends BehaviourName> {
-  type: Name,
-  params?: GetBehaviourState<Name>,
-  state?: GetBehaviourParams<Name>,
-}
+declare type AI = {
+  [K in keyof AIHandlers]: { type: K } & (
+    AIHandlers[K] extends AIHandler<infer State> ? State : {}
+  )
+}[keyof AIHandlers];
 
 declare interface Particle {
   x: number,
