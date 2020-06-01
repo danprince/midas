@@ -236,7 +236,14 @@ export class RenderingSystem extends System {
   renderAnimations(z) {
     for (let animation of systems.animation.animations) {
       if (Rectangle.contains(this.viewport, animation)) {
-        this.drawSprite(animation.sprite + animation.frame, animation.x, animation.y, animation.w, animation.h);
+        this.drawSprite(
+          animation.sprite + animation.frame,
+          animation.x,
+          animation.y,
+          animation.w,
+          animation.h,
+          animation.flipX,
+        );
       }
     }
   }

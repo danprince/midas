@@ -19,6 +19,7 @@ export function attack(object, target) {
     sprite: 150,
     length: 5,
     z: 1,
+    flipX: object.direction === Direction.WEST
   });
 
   if (target.hp <= 0) {

@@ -70,6 +70,7 @@ declare interface AnimatedSprite {
   sprite: number,
   length: number,
   counter?: number,
+  flipX?: boolean,
 }
 
 declare interface TweenState {
