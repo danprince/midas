@@ -1,4 +1,4 @@
-import { RNG as Random, Easing } from "silmarils";
+import { RNG as Random, Easing, Direction } from "silmarils";
 
 /**
  * @param {GameObject} object
@@ -47,10 +47,12 @@ export function move(object, dx, dy) {
   let tx = object.x + dx;
   let ty = object.y + dy;
 
+  object.direction = Direction.cardinalFromVector([dx, dy]);
+
   if (object.mobile) {
-    if (dx < 0) {
+    if (object.direction === Direction.WEST) {
       object.flipX = true;
-    } else if (dx > 0) {
+    } else if (object.direction === Direction.EAST) {
       object.flipX = false;
     }
   }
