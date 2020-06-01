@@ -1,4 +1,4 @@
-import { Direction } from "silmarils";
+type CardinalDirection = import("silmarils/direction").CardinalDirection;
 
 declare var game: import("./game").Game;
 
@@ -24,7 +24,7 @@ declare interface GameObject {
   flipX?: boolean,
   sprite?: number,
   shadow?: boolean,
-  direction?: Direction.CardinalDirection,
+  direction?: CardinalDirection,
   mobile?: boolean,
   hp?: number,
   coins?: number,
