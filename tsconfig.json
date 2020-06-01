@@ -6,10 +6,14 @@
     "checkJs": true,
     "esModuleInterop": true,
     "noImplicitAny": false,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
   "include": [
     "**/*.d.ts",
     "**/*.js"
+  ],
+  "exclude": [
+    "build"
   ]
 }

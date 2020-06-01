@@ -2,14 +2,14 @@ import * as Easings from "silmarils/easing";
 
 import { Screen } from "./game.js";
 import * as Actions from "./actions.js";
-import * as Objects from "./objects.js";
 import * as Levels from "./levels.js";
+import { build } from "./registry.js";
 
 export class GameScreen extends Screen {
   enter() {
     game.stage = Levels.sandbox();
-    game.player = Objects.midas();
-    game.stage.spawn(game.player);
+    game.player = build("midas");
+    game.stage.add(game.player, 0, 0);
 
     // Set the camera to follow the player
     systems.camera.target = game.player;

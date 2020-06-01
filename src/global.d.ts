@@ -11,6 +11,7 @@ declare var systems: {
 }
 
 declare interface GameObject {
+  extends?: string[],
   x: number,
   y: number,
   w?: number,
@@ -37,15 +38,7 @@ declare interface GameObject {
   canBeTransmuted?: boolean,
 }
 
-type AIHandlers = typeof import("./ai");
-
-declare type AI = {
-  [K in keyof AIHandlers]: (
-    Parameters<AIHandlers[K]> extends [GameObject, infer State]
-      ? ({ type: K } & State)
-      : ({ type: K } | K)
-  )
-}[keyof AIHandlers];
+declare type AI = string | { type: string, [key: string]: any };
 
 declare interface Particle {
   x: number,

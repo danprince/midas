@@ -1,0 +1,103 @@
+{
+  "mobile": {
+    "canJump": true,
+    "mobile": true,
+    "shadow": true,
+    "canBeTransmuted": true,
+    "canBeCrushed": true
+  },
+  "human": {
+    "extends": ["mobile"],
+    "canBeAttacked": true,
+    "sprite": 84,
+    "ai": "wander"
+  },
+  "monster": {
+    "extends": ["mobile"],
+    "canBeAttacked": true,
+    "ai": "wander"
+  },
+  "midas": {
+    "extends": ["human"],
+    "sprite": 1,
+    "canBeTransmuted": false,
+    "ai": null
+  },
+  "zoe": {
+    "extends": ["human"],
+    "sprite": 2
+  },
+  "large": {
+    "h": 2,
+    "canBeCrushed": false
+  },
+  "block": {
+    "extends": ["large"],
+    "sprite": 30,
+    "canBePushed": true,
+    "canBeTransmuted": true
+  },
+  "column": {
+    "extends": ["large"],
+    "sprite": 32,
+    "canBePushed": true,
+    "canBeTransmuted": true
+  },
+  "stairs": {
+    "h": 2
+  },
+  "upstairs": {
+    "extends": ["stairs"],
+    "sprite": 36
+  },
+  "downstairs": {
+    "extends": ["stairs"],
+    "sprite": 37
+  },
+  "gorgon": {
+    "extends": ["large", "monster"]
+  },
+  "medusa": {
+    "extends": ["gorgon"],
+    "sprite": 50,
+    "hp": 3
+  },
+  "cyclops": {
+    "extends": ["large", "monster"],
+    "sprite": 52,
+    "hp": 3,
+    "canPush": true
+  },
+  "vampire": {
+    "extends": ["monster"]
+  },
+  "lamia": {
+    "extends": ["vampire"],
+    "sprite": 72
+  },
+  "faun": {
+    "extends": ["human"],
+    "sprite": 74
+  },
+  "philosopher": {
+    "extends": ["human"],
+    "sprite": 80
+  },
+  "scholar": {
+    "extends": ["human"],
+    "sprite": 82
+  },
+  "hoplite": {
+    "extends": ["human"],
+    "hp": 1,
+    "sprite": 90
+  },
+  "hoplite-spearman": {
+    "extends": ["hoplite"],
+    "sprite": 92
+  },
+  "hoplite-captain": {
+    "extends": ["hoplite"],
+    "sprite": 94
+  }
+}

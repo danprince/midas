@@ -22,14 +22,11 @@ export function attack(object, target) {
   });
 
   if (target.hp <= 0) {
-    // probably want to replace with a new object?
-    target.ai = null;
-    target.sprite += 10 * (target.h || 1);
-    target.shadow = false;
-    target.canBePushed = true;
-    target.mobile = false;
-    target.canBeAttacked = false;
-    target.canJump = false;
+    if (target.canBeTransmuted) {
+      transmute(target);
+    } else {
+      game.stage.remove(target);
+    }
   }
 }
 
@@ -37,7 +34,7 @@ export function attack(object, target) {
  * @param {GameObject} object
  */
 export function crush(object) {
-  game.stage.despawn(object);
+  game.stage.remove(object);
 }
 
 /**
@@ -70,7 +67,7 @@ export function move(object, dx, dy) {
 
   // Midas turns blocks gold
   if (object === game.player && target) {
-    if (target.canBeTransmuted && !target.transmuted) {
+    if (target.canBeTransmuted && !target.transmuted && !target.hp) {
       transmute(target);
     }
   }
@@ -137,8 +134,8 @@ export function goldify(x, y) {
 
   switch (tile) {
     case 20:
-    case 21:
-      game.stage.setTile(x, y, tile + 2);
+    case 22:
+      game.stage.setTile(x, y, tile + 1);
       break;
     default:
       return;
@@ -146,7 +143,7 @@ export function goldify(x, y) {
 
   let coins = Random.int(3, 7);
 
-  game.player.coins += coins;
+  //game.player.coins += coins;
 
   for (let i = 0; i < coins; i++) {
     systems.particle.add({
@@ -171,6 +168,14 @@ export function goldify(x, y) {
  * @param {GameObject} object
  */
 export function transmute(object) {
-  object.sprite += 1;
   object.transmuted = true;
+  object.ai = null;
+  object.shadow = false;
+  object.canBePushed = true;
+  object.canBeAttacked = false;
+  object.canJump = false;
+  object.mobile = false;
+
+  // TODO: Allow objects to specify which sprite they transmute into
+  object.sprite += 1;
 }

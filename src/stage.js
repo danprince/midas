@@ -1,3 +1,5 @@
+import { build } from "./registry.js";
+
 export class Stage {
   /**
    * @param {number} width
@@ -29,11 +31,22 @@ export class Stage {
   }
 
   /**
+   * @param {string} id
+   * @param {number} x
+   * @param {number} y
+   */
+  spawn(id, x, y) {
+    let object = build(id);
+    this.add(object, x, y);
+    return object;
+  }
+
+  /**
    * @param {GameObject} object
    * @param {number} x
    * @param {number} y
    */
-  spawn(object, x = object.x, y = object.y) {
+  add(object, x = object.x, y = object.y) {
     if (x != null) {
       object.x = x;
     }
@@ -48,7 +61,7 @@ export class Stage {
   /**
    * @param {GameObject} object
    */
-  despawn(object) {
+  remove(object) {
     this.objects.splice(this.objects.indexOf(object), 1);
   }
 
