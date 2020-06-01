@@ -21,7 +21,9 @@
     "extends": ["human"],
     "sprite": 1,
     "canBeTransmuted": false,
-    "ai": null
+    "ai": null,
+    "canAttack": true,
+    "canPush": true
   },
   "zoe": {
     "extends": ["human"],
@@ -42,6 +44,11 @@
     "sprite": 32,
     "canBePushed": true,
     "canBeTransmuted": true
+  },
+  "coins": {
+    "sprite": 120,
+    "canBePushed": true,
+    "canBeCrushed": true
   },
   "stairs": {
     "h": 2

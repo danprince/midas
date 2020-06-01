@@ -13,12 +13,11 @@ export function sandbox() {
     }
   }
 
-  // coins
-  stage.add({ sprite: 10, x: 5, y: 4, canBePushed: true, canBeCrushed: true });
-  stage.add({ sprite: 10, x: 1, y: 1, canBePushed: true, canBeCrushed: true });
-  stage.add({ sprite: 10, x: 1, y: 8, canBePushed: true, canBeCrushed: true });
-  stage.add({ sprite: 11, x: 2, y: 2, canBePushed: true, canBeCrushed: true });
-  stage.add({ sprite: 10, x: 8, y: 6, canBePushed: true, canBeCrushed: true });
+  stage.spawn("coins", 5, 4);
+  stage.spawn("coins", 1, 1);
+  stage.spawn("coins", 1, 8);
+  stage.spawn("coins", 2, 2);
+  stage.spawn("coins", 8, 6);
 
   stage.spawn("column", 7, 6);
   stage.spawn("upstairs", 4, 6);
