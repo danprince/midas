@@ -188,4 +188,22 @@ export function transmute(object) {
 
   // TODO: Allow objects to specify which sprite they transmute into
   object.sprite += 1;
+
+  systems.audio.play("coins");
+
+  for (let i = 0; i < Random.int(3, 7); i++) {
+    systems.particle.add({
+      x: object.x + 0.5,
+      y: object.y - 0.3,
+      r: 0,
+      sprite: Math.random() > 0.5 ? 12 : 13,
+      w: 4 / 16,
+      h: 4 / 16,
+      vx: (Math.random() - 0.5) * 0.05,
+      vy: (Math.random() - 1) * 0.05,
+      vr: 0.1,
+      len: 100,
+      t: 0,
+    });
+  }
 }
