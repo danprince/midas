@@ -44,6 +44,7 @@ export function build(id) {
     }
   }
 
+  object.id = game.getNextObjectId();
   object.extends = types;
 
   return object;

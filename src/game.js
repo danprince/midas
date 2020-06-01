@@ -24,6 +24,12 @@ export class Game {
     this.camera = new Camera(0, 0);
 
     this.timer = null;
+
+    this.objectId = 0;
+  }
+
+  getNextObjectId() {
+    return this.objectId++;
   }
 
   start() {

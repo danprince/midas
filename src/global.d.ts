@@ -14,6 +14,7 @@ declare var systems: {
 
 declare interface GameObject {
   extends?: string[],
+  id: number,
   x: number,
   y: number,
   w?: number,
