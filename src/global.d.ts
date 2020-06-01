@@ -1,13 +1,13 @@
 declare var game: import("./game").Game;
 
 declare var systems: {
-  particle: import("./systems").ParticleSystem,
-  audio: import("./systems").AudioSystem,
-  animation: import("./systems").AnimationSystem,
-  ai: import("./systems").AISystem,
-  camera: import("./systems").CameraSystem,
-  render: import("./systems").RenderingSystem,
-  tween: import("./systems").TweenSystem,
+  ai: import("./systems/ai").AISystem,
+  animation: import("./systems/animation").AnimationSystem,
+  audio: import("./systems/audio").AudioSystem,
+  camera: import("./systems/camera").CameraSystem,
+  particle: import("./systems/particles").ParticleSystem,
+  render: import("./systems/render").RenderingSystem,
+  tween: import("./systems/tween").TweenSystem,
 }
 
 declare interface GameObject {
