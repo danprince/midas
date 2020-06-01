@@ -1,3 +1,4 @@
+import { Rectangle } from "silmarils";
 import { System } from "../game.js";
 import config from "../config.js";
 
@@ -19,6 +20,12 @@ export class RenderingSystem extends System {
     this.flippedSprites = document.createElement("canvas");
 
     this.sprites.onload = () => this.preflip();
+
+    /**
+     * Keep track of the current viewport. Use this to cull objects
+     * and tiles based on whether they are visible.
+     */
+    this.viewport = { x: 0, y: 0, width: 0, height: 0 };
   }
 
   // Render the spritesheet but flipped horizontally so that we can
@@ -83,6 +90,32 @@ export class RenderingSystem extends System {
   }
 
   /**
+   * Calculate the current viewport in grid coordinates.
+   */
+  getViewport() {
+    let camera = game.camera;
+    let canvasGridWidth = Math.ceil(this.canvas.width / config.tileWidth);
+    let canvasGridHeight = Math.ceil(this.canvas.height / config.tileHeight);
+
+    let x0 = Math.floor(camera.x - canvasGridWidth / 2);
+    let y0 = Math.floor(camera.y - canvasGridHeight / 2);
+    let x1 = x0 + canvasGridWidth + 1;
+    let y1 = y0 + canvasGridHeight + 1;
+
+    x0 = Math.max(0, x0);
+    y0 = Math.max(0, y0);
+    x1 = Math.min(x1, game.stage.width);
+    y1 = Math.min(y1, game.stage.height);
+
+    return {
+      x: x0,
+      y: y0,
+      width: x1 - x0,
+      height: y1 - y0,
+    };
+  }
+
+  /**
    * @param {number} dt
    */
   update(dt) {
@@ -106,10 +139,12 @@ export class RenderingSystem extends System {
       -game.camera.y * config.tileHeight
     );
 
+    // Only need to calculate the current viewport once per render
+    this.viewport = this.getViewport();
+
     this.renderTiles();
-    this.renderAnimationsByLayer(0);
     this.renderObjects();
-    this.renderAnimationsByLayer(1);
+    this.renderAnimations();
     this.renderParticles();
 
     ctx.restore();
@@ -122,11 +157,14 @@ export class RenderingSystem extends System {
   }
 
   renderTiles() {
-    for (let y = 0; y < game.stage.height; y++) {
-      for (let x = 0; x < game.stage.width; x++) {
-        let i = x + y * game.stage.width;
-        let tile = game.stage.tiles[i];
+    let x0 = this.viewport.x;
+    let y0 = this.viewport.y;
+    let x1 = x0 + this.viewport.width;
+    let y1 = y0 + this.viewport.height;
 
+    for (let y = y0; y < y1; y++) {
+      for (let x = x0; x < x1; x++) {
+        let tile = game.stage.getTile(x, y);
         this.drawSprite(tile, x, y);
       }
     }
@@ -136,8 +174,10 @@ export class RenderingSystem extends System {
     let objectsByRow = {};
 
     for (let object of game.stage.objects) {
-      objectsByRow[object.y] = objectsByRow[object.y] || [];
-      objectsByRow[object.y].push(object);
+      if (Rectangle.contains(this.viewport, object)) {
+        objectsByRow[object.y] = objectsByRow[object.y] || [];
+        objectsByRow[object.y].push(object);
+      }
     }
 
     for (let y = 0; y < game.stage.height; y++) {
@@ -193,9 +233,9 @@ export class RenderingSystem extends System {
     ctx.restore();
   }
 
-  renderAnimationsByLayer(z) {
+  renderAnimations(z) {
     for (let animation of systems.animation.animations) {
-      if (animation.z === z) {
+      if (Rectangle.contains(this.viewport, animation)) {
         this.drawSprite(animation.sprite + animation.frame, animation.x, animation.y, animation.w, animation.h);
       }
     }
@@ -207,24 +247,13 @@ export class RenderingSystem extends System {
     ctx.save();
 
     for (let particle of systems.particle.particles) {
-      ctx.globalAlpha = particle.alpha;
-      this.drawSprite(particle.sprite, particle.x, particle.y, particle.w, particle.h);
+      if (Rectangle.contains(this.viewport, particle)) {
+        ctx.globalAlpha = particle.alpha;
+        this.drawSprite(particle.sprite, particle.x, particle.y, particle.w, particle.h);
+      }
     }
 
     ctx.restore();
-  }
-
-  renderHud() {
-    this.ctx.save();
-
-    // Draw mouse pointer
-    this.drawSprite(
-      7,
-      game.pointer.x / config.tileWidth / this.scale,
-      game.pointer.y / config.tileHeight / this.scale
-    );
-
-    this.ctx.restore();
   }
 
   renderCursor() {

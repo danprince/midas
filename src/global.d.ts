@@ -6,7 +6,7 @@ declare var systems: {
   audio: import("./systems/audio").AudioSystem,
   camera: import("./systems/camera").CameraSystem,
   particle: import("./systems/particles").ParticleSystem,
-  render: import("./systems/render").RenderingSystem,
+  render: import("./systems/rendering").RenderingSystem,
   tween: import("./systems/tween").TweenSystem,
 }
 
