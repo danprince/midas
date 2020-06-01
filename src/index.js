@@ -1,22 +1,19 @@
 import { Game } from "./game.js";
 import { GameScreen } from "./screens.js";
-
-import {
-  ParticleSystem,
-  AudioSystem,
-  AnimationSystem,
-  CameraSystem,
-  RenderingSystem,
-  AISystem,
-  TweenSystem
-} from "./systems.js";
+import { AISystem } from "./systems/ai.js";
+import { AnimationSystem } from "./systems/animation.js";
+import { AudioSystem } from "./systems/audio.js";
+import { CameraSystem } from "./systems/camera.js";
+import { ParticleSystem } from "./systems/particles.js";
+import { RenderingSystem } from "./systems/rendering.js";
+import { TweenSystem } from "./systems/tween.js";
 
 window.systems = {
-  particle: new ParticleSystem(),
-  audio: new AudioSystem(),
-  animation: new AnimationSystem(),
   ai: new AISystem(),
+  animation: new AnimationSystem(),
+  audio: new AudioSystem(),
   camera: new CameraSystem(),
+  particle: new ParticleSystem(),
   render: new RenderingSystem(),
   tween: new TweenSystem(),
 };

@@ -124,3 +124,20 @@ export class Camera {
     };
   }
 }
+
+export class System {
+  constructor() {
+    /**
+     * @protected
+     */
+    this.enabled = true;
+  }
+
+  enable() {
+    this.enabled = true;
+  }
+
+  disabled() {
+    this.enabled = false;
+  }
+}
