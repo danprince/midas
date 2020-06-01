@@ -65,11 +65,18 @@ export function move(object, dx, dy) {
 
   let target = game.stage.getObjectAt(tx, ty);
 
-  // Midas turns blocks gold
-  if (object === game.player && target) {
-    if (target.canBeTransmuted && !target.transmuted && !target.hp) {
-      transmute(target);
-    }
+  if (
+    target &&
+    // check whether this object can transmute objects into gold
+    object.canTransmute &&
+    // check that the target object can be transmuted
+    target.canBeTransmuted &&
+    // check that the target object is not already transmuted
+    !target.transmuted &&
+    // can't transmute living objects
+    !target.hp
+  ) {
+    transmute(target);
   }
 
   if (target && object.canAttack && target.canBeAttacked) {

@@ -35,6 +35,7 @@ declare interface GameObject {
   canBePushed?: boolean,
   canCrush?: boolean,
   canBeCrushed?: boolean,
+  canTransmute?: boolean,
   canBeTransmuted?: boolean,
 }
 

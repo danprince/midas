@@ -20,6 +20,7 @@
   "midas": {
     "extends": ["human"],
     "sprite": 1,
+    "canTransmute": true,
     "canBeTransmuted": false,
     "ai": null,
     "canAttack": true,
