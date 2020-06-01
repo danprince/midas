@@ -96,3 +96,14 @@ declare interface Tween<State extends TweenState> {
   step(state: State): void,
   done?(): void,
 }
+
+declare interface Save {
+  playerId: number,
+  objectId: number,
+  stage: {
+    width: number,
+    height: number,
+    tiles: number[],
+    objects: GameObject[],
+  },
+}

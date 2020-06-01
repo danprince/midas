@@ -56,6 +56,31 @@ export class Game {
     this.screen = screen;
     this.screen.enter();
   }
+
+  /**
+   * @return {Save}
+   */
+  serialize() {
+    return {
+      playerId: this.player.id,
+      objectId: this.objectId,
+      stage: this.stage,
+    };
+  }
+
+  /**
+   * @param {Save} save
+   */
+  deserialize(save) {
+    this.stage = new Stage(save.stage.width, save.stage.height, 0);
+    this.stage.tiles = save.stage.tiles;
+    this.stage.objects = save.stage.objects;
+    this.objectId = save.objectId;
+    this.player = this.stage.getObjectById(save.playerId);
+
+    systems.camera.target = this.player;
+    systems.camera.update();
+  }
 }
 
 export class Screen {

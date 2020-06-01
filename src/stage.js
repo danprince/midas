@@ -95,4 +95,12 @@ export class Stage {
   getObjectAt(x, y) {
     return this.objects.find(object => object.x === x && object.y === y);
   }
+
+  /**
+   * @param {number} id
+   * @return {GameObject}
+   */
+  getObjectById(id) {
+    return this.objects.find(object => object.id === id);
+  }
 }

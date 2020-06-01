@@ -3,10 +3,21 @@ import * as Easings from "silmarils/easing";
 import { Screen } from "./game.js";
 import * as Actions from "./actions.js";
 import * as Levels from "./levels.js";
+import { save, load } from "./storage.js";
 import { build } from "./registry.js";
 
 export class GameScreen extends Screen {
   enter() {
+    try {
+      load();
+    } catch (err) {
+      this.startNewGame();
+    }
+
+    onbeforeunload = () => save();
+  }
+
+  startNewGame() {
     game.stage = Levels.sandbox();
     game.player = build("midas");
     game.stage.add(game.player, 0, 0);
@@ -68,6 +79,18 @@ export class GameScreen extends Screen {
           break;
         case "r":
           success = true;
+          break;
+
+        case "s":
+          save();
+          break;
+
+        case "l":
+          load();
+          break;
+
+        case "n":
+          this.startNewGame();
           break;
 
         case "-": {
