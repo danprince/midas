@@ -16,18 +16,21 @@ body {
   overflow: hidden;
   image-rendering: pixelated;
   user-select: none;
-  cursor: url(/assets/cursor.png), none;
+  cursor: url(/sprites/cursor.png), none;
 }
 
-#viewport {
+.viewport {
   position: relative;
   width: 100vw;
   height: 100vh;
+  position: fixed;
 }
 
-#viewport canvas {
+.viewport canvas {
   display: block;
   transform-origin: top left;
-  position: absolute;
 }
 
+.outline {
+  text-shadow: 3px 0 black, -3px 0 black, 0 3px black, 0 -3px black;
+}
