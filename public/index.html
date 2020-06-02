@@ -23,48 +23,53 @@
       </center>
     </div>
     <div id="game-screen" class="viewport screen">
-      <div class="hud top-left" style="position: fixed; z-index: 10; padding: 24px">
-        <div style="display: flex; flex-direction: column; align-items: center">
-          <div style="height: 105px; width: 105px; background: url(/sprites/portrait_background.png); display: flex; align-items: center; justify-content: center">
-            <img src="/sprites/midas_face_1.png" />
-          </div>
-
-          <div style="display: flex; height: 24px; position: relative; top: -16px">
-            <div class="outline" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center">
-              90/100
-            </div>
-            <div style="height: 100%; width: 9px; background: url(/sprites/red_bar_start.png)"></div>
-            <div style="height: 100%; width: 200px; background: url(/sprites/red_bar_filled.png)"></div>
-            <div style="height: 100%; width: 20px; background: url(/sprites/red_bar_empty.png)"></div>
-            <div style="height: 100%; width: 9px; background: url(/sprites/red_bar_end.png)"></div>
-          </div>
-          <div style="display: flex; height: 24px; position: relative; top: -16px">
-            <div class="outline" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center">
-              20/49
-            </div>
-            <div style="height: 100%; width: 9px; background: url(/sprites/gold_bar_start.png)"></div>
-            <div style="height: 100%; width: 100px; background: url(/sprites/gold_bar_filled.png)"></div>
-            <div style="height: 100%; width: 120px; background: url(/sprites/gold_bar_empty.png)"></div>
-            <div style="height: 100%; width: 9px; background: url(/sprites/gold_bar_end.png)"></div>
-          </div>
-        </div>
-      </div>
-      <div class="hud top-right" style="position: fixed; right: 0; z-index: 10; padding: 24px">
-        <div style="display: flex; align-items: flex-start">
-          <div style="display: flex; align-items: center">
-            <img src="/sprites/icon_coin.png" />
-            <span class="outline">100</span>
-          </div>
-        </div>
-      </div>
-      <div class="hud bottom" style="position: fixed; bottom: 0; left: 0; right: 0; display: flex; justify-content: center; z-index: 10; padding: 16px">
-        <div style="margin: 8px; width: 48px; height: 48px; background: url(/sprites/item_slot_active.png);">
-          <div style="width: 16px; height: 16px; background: url(/sprites/atlas.png); background-position: -16px 144px; transform: scale(3); transform-origin: top left"></div>
-        </div>
-        <div style="margin: 8px; width: 48px; height: 48px; background: url(/sprites/item_slot_empty.png);">
-        </div>
-      </div>
       <canvas id="renderer"></canvas>
+
+      <div class="hud top-left">
+        <div class="hud-portrait">
+          <img id="hud-midas-face" src="/sprites/midas_face_1.png" />
+        </div>
+
+        <div id="hud-health-bar" class="bar red-bar">
+          <div class="bar-start"></div>
+          <div class="bar-filled" style="width: 200px"></div>
+          <div class="bar-empty" style="width: 20px"></div>
+          <div class="bar-end"></div>
+          <div class="bar-label outline">90/100</div>
+        </div>
+
+        <div id="hud-sanity-bar" class="bar gold-bar">
+          <div class="bar-start"></div>
+          <div class="bar-filled" style="width: 200px"></div>
+          <div class="bar-empty" style="width: 20px"></div>
+          <div class="bar-end"></div>
+          <div class="bar-label outline">20/49</div>
+        </div>
+
+        <div id="hud-location" class="outline" style="text-align: center">Phrygian Throne</div>
+      </div>
+
+      <div class="hud top-right">
+        <div class="hud-stats">
+          <div class="hud-stat">
+            <img src="/sprites/icon_coin.png" />
+            <span id="hud-coins-label" class="outline">100</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud bottom">
+        <div class="hud-item-slot">
+          <div class="hud-item-label outline">1</div>
+        </div>
+        <div class="hud-item-slot hud-item-slot-active">
+          <div class="hud-item" style="background-position: -16px 144px;"></div>
+          <div class="hud-item-label outline">2</div>
+        </div>
+        <div class="hud-item-slot">
+          <div class="hud-item-label outline">3</div>
+        </div>
+      </div>
     </div>
     <script type="module" src="/_dist_/index.js"></script>
   </body>

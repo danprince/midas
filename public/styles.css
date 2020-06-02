@@ -20,10 +20,12 @@ body {
 }
 
 .viewport {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #141722;
 }
 
 .viewport canvas {
@@ -33,4 +35,134 @@ body {
 
 .outline {
   text-shadow: 3px 0 black, -3px 0 black, 0 3px black, 0 -3px black;
+}
+
+.hud.top-left {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hud.top-right {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hud.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.hud-stat {
+  display: flex;
+  font-size: 36px;
+  align-items: center;
+}
+
+.hud-portrait {
+  position: relative;
+  width: 105px;
+  height: 105px;
+  background-image: url(/sprites/portrait_background.png);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar {
+  height: 24px;
+  display: flex;
+  position: relative;
+}
+
+.bar-start, .bar-filled, .bar-empty, .bar-end {
+  height: 100%;
+}
+
+.bar-start, .bar-end {
+  width: 9px;
+}
+
+.bar-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.red-bar .bar-start {
+  background-image: url(/sprites/red_bar_start.png);
+}
+
+.red-bar .bar-end {
+  background-image: url(/sprites/red_bar_end.png);
+}
+
+.red-bar .bar-filled {
+  background-image: url(/sprites/red_bar_filled.png);
+}
+
+.red-bar .bar-empty {
+  background-image: url(/sprites/red_bar_empty.png);
+}
+
+.gold-bar .bar-start {
+  background-image: url(/sprites/gold_bar_start.png);
+}
+
+.gold-bar .bar-end {
+  background-image: url(/sprites/gold_bar_end.png);
+}
+
+.gold-bar .bar-filled {
+  background-image: url(/sprites/gold_bar_filled.png);
+}
+
+.gold-bar .bar-empty {
+  background-image: url(/sprites/gold_bar_empty.png);
+}
+
+.hud-item-slot {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-image: url(/sprites/item_slot_empty.png);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+}
+
+.hud-item-slot-active {
+  background-image: url(/sprites/item_slot_active.png);
+}
+
+.hud-item-slot-inactive {
+  background-image: url(/sprites/item_slot_inactive.png);
+}
+
+.hud-item {
+  width: 16px;
+  height: 16px;
+  background: url(/sprites/atlas.png);
+  transform: scale(3);
+}
+
+.hud-item-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
