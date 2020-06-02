@@ -180,7 +180,10 @@ export class RenderingSystem extends System {
       }
     }
 
-    for (let y = 0; y < game.stage.height; y++) {
+    let y0 = this.viewport.y;
+    let y1 = y0 + this.viewport.height;
+
+    for (let y = y0; y < y1; y++) {
       let objects = objectsByRow[y];
 
       if (objects) {
