@@ -28,6 +28,11 @@ export class Stage {
      * @type {GameObject[]}
      */
     this.objects = [];
+
+    /**
+     * @type {number[]}
+     */
+    this.walls = [];
   }
 
   /**

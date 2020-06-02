@@ -6,6 +6,7 @@ declare var systems: {
   ai: import("./systems/ai").AISystem,
   animation: import("./systems/animation").AnimationSystem,
   audio: import("./systems/audio").AudioSystem,
+  autotiling: import("./systems/autotiling").AutotilingSystem,
   camera: import("./systems/camera").CameraSystem,
   particle: import("./systems/particles").ParticleSystem,
   render: import("./systems/rendering").RenderingSystem,
@@ -104,6 +105,7 @@ declare interface Save {
     width: number,
     height: number,
     tiles: number[],
+    walls: number[],
     objects: GameObject[],
   },
 }

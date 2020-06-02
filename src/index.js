@@ -3,6 +3,7 @@ import { GameScreen } from "./screens.js";
 import { AISystem } from "./systems/ai.js";
 import { AnimationSystem } from "./systems/animation.js";
 import { AudioSystem } from "./systems/audio.js";
+import { AutotilingSystem } from "./systems/autotiling.js";
 import { CameraSystem } from "./systems/camera.js";
 import { ParticleSystem } from "./systems/particles.js";
 import { RenderingSystem } from "./systems/rendering.js";
@@ -12,6 +13,7 @@ window.systems = {
   ai: new AISystem(),
   animation: new AnimationSystem(),
   audio: new AudioSystem(),
+  autotiling: new AutotilingSystem(),
   camera: new CameraSystem(),
   particle: new ParticleSystem(),
   render: new RenderingSystem(),

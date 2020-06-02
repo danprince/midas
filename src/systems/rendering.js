@@ -143,6 +143,7 @@ export class RenderingSystem extends System {
     this.viewport = this.calculateViewport();
 
     this.renderTiles();
+    this.renderWalls();
     this.renderObjects();
     this.renderAnimations();
     this.renderParticles();
@@ -164,6 +165,20 @@ export class RenderingSystem extends System {
       for (let x = x0; x < x1; x++) {
         let tile = game.stage.getTile(x, y);
         this.drawSprite(tile, x, y);
+      }
+    }
+  }
+
+  renderWalls() {
+    let x0 = this.viewport.x;
+    let y0 = this.viewport.y;
+    let x1 = x0 + this.viewport.width;
+    let y1 = y0 + this.viewport.height;
+
+    for (let y = y0; y < y1; y++) {
+      for (let x = x0; x < x1; x++) {
+        let sprite = game.stage.walls[x + y * game.stage.width];
+        this.drawSprite(sprite, x, y, 1, 2);
       }
     }
   }

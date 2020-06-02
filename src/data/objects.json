@@ -53,7 +53,7 @@
     "canBePushed": false
   },
   "coins": {
-    "sprite": 120,
+    "sprite": 16,
     "canBePushed": true,
     "canBeCrushed": true
   },

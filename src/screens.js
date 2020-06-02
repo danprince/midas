@@ -20,7 +20,10 @@ export class GameScreen extends Screen {
   startNewGame() {
     game.stage = Levels.sandbox();
     game.player = build("midas");
-    game.stage.add(game.player, 0, 0);
+    game.stage.add(game.player, 5, 5);
+
+    // Run
+    systems.autotiling.run();
 
     // Set the camera to follow the player
     systems.camera.target = game.player;

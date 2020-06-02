@@ -75,6 +75,7 @@ export class Game {
     this.stage = new Stage(save.stage.width, save.stage.height, 0);
     this.stage.tiles = save.stage.tiles;
     this.stage.objects = save.stage.objects;
+    this.stage.walls = save.stage.walls;
     this.objectId = save.objectId;
     this.player = this.stage.getObjectById(save.playerId);
 
