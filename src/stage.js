@@ -92,6 +92,12 @@ export class Stage {
     }
   }
 
+  getWall(x, y) {
+    if (x >= 0 && y >= 0 && x < this.width && y < this.height) {
+      return this.walls[x + y * this.width];
+    }
+  }
+
   /**
    * @param {number} x
    * @param {number} y

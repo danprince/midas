@@ -2,42 +2,66 @@ import { System } from "../game.js";
 
 export class AutotilingSystem extends System {
   run() {
-    this.autotileWalls();
+    // Autotile with blocks
+    this.autowall();
+
+    // Autotile with walls
+    //this.autotileWalls();
+  }
+
+  autowall() {
+    let walls = game.stage.walls;
+    walls.length = 0;
+
+    for (let x = 0; x < game.stage.width; x++) {
+      for (let y = 0; y < game.stage.height; y++) {
+        let tile = game.stage.getTile(x, y);
+
+        // Wall can't get placed above a tile
+        if (tile > 0) continue;
+
+        let a = game.stage.getTile(x - 1, y - 1) > 0 ? 1 : 0;
+        let b = game.stage.getTile(x + 0, y - 1) > 0 ? 1 : 0;
+        let c = game.stage.getTile(x + 1, y - 1) > 0 ? 1 : 0;
+        let d = game.stage.getTile(x - 1, y + 0) > 0 ? 1 : 0;
+        let e = game.stage.getTile(x + 1, y + 0) > 0 ? 1 : 0;
+        let f = game.stage.getTile(x - 1, y + 1) > 0 ? 1 : 0;
+        let g = game.stage.getTile(x + 0, y + 1) > 0 ? 1 : 0;
+        let h = game.stage.getTile(x + 1, y + 1) > 0 ? 1 : 0;
+
+        // if any adjacent tile is present, this tile is a wall
+        if (a || b || c || d || e || f || g || h) {
+          walls[x + y * game.stage.width] = 160;
+        }
+      }
+    }
+
+    for (let x = 0; x < game.stage.width; x++) {
+      for (let y = 0; y < game.stage.height; y++) {
+        let wall = game.stage.walls[x+ y* game.stage.width];
+
+        // No wall, no autowalling
+        if (!wall) continue;
+
+        let a = game.stage.getWall(x + 0, y - 1) ? 1 : 0;
+        let b = game.stage.getWall(x - 1, y + 0) ? 1 : 0;
+        let c = game.stage.getWall(x + 1, y + 0) ? 1 : 0;
+        let d = game.stage.getWall(x + 0, y + 1) ? 1 : 0;
+        let pattern = a << 3 | b << 2 | c << 1 | d;
+
+        // Need to account for the fact that wall sprites are 2 tiles tall
+        if (pattern >= 10) {
+          pattern += 10;
+        }
+
+        wall += pattern;
+        walls[x + y * game.stage.width] = wall;
+      }
+    }
   }
 
   autotileWalls() {
     let walls = game.stage.walls;
-
-    onclick = (event) => {
-      let { x, y } = game.camera.screenToGrid(event.clientX, event.clientY);
-      x = Math.floor(x);
-      y = Math.floor(y);
-
-      let a = game.stage.getTile(x - 1, y - 1) > 0 ? 1 : 0;
-      let b = game.stage.getTile(x + 0, y - 1) > 0 ? 1 : 0;
-      let c = game.stage.getTile(x + 1, y - 1) > 0 ? 1 : 0;
-      let d = game.stage.getTile(x - 1, y + 0) > 0 ? 1 : 0;
-      let e = game.stage.getTile(x + 1, y + 0) > 0 ? 1 : 0;
-      let f = game.stage.getTile(x - 1, y + 1) > 0 ? 1 : 0;
-      let g = game.stage.getTile(x + 0, y + 1) > 0 ? 1 : 0;
-      let h = game.stage.getTile(x + 1, y + 1) > 0 ? 1 : 0;
-
-      let pattern = (
-        (a << 7) |
-        (b << 6) |
-        (c << 5) |
-        (d << 4) |
-        (e << 3) |
-        (f << 2) |
-        (g << 1) |
-        (h << 0)
-      );
-
-      console.log(pattern);
-
-      game.player.x = x;
-      game.player.y = y;
-    }
 
     for (let x = 0; x < game.stage.width; x++) {
       for (let y = 0; y < game.stage.height; y++) {
@@ -48,9 +72,9 @@ export class AutotilingSystem extends System {
           continue;
         }
 
-        // A B C
-        // D x E
-        // F G H
+        // a b c
+        // d . e
+        // f g h
 
         let a = game.stage.getTile(x - 1, y - 1) > 0 ? 1 : 0;
         let b = game.stage.getTile(x + 0, y - 1) > 0 ? 1 : 0;
@@ -73,6 +97,9 @@ export class AutotilingSystem extends System {
         );
 
         let sprite = 0;
+
+        // TODO: Must be a better way to map from 255 possible combos
+        // down to the 20 sprites we have.
 
         switch (pattern) {
           case 8:

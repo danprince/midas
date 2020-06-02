@@ -14,6 +14,10 @@ export class GameScreen extends Screen {
       this.startNewGame();
     }
 
+    // run autotiling in case we changed the rules since the map
+    // was created
+    systems.autotiling.run();
+
     onbeforeunload = () => save();
   }
 

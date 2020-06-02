@@ -14,9 +14,9 @@ export function sandbox() {
   //}
 
   // Draw 20 random rects
-  for (let i = 0; i < 20; i++) {
-    let w = Random.int(1, 5);
-    let h = Random.int(1, 5);
+  for (let i = 0; i < 5; i++) {
+    let w = Random.int(1, 10);
+    let h = Random.int(1, 10);
     let x = Random.int(1, stage.width - w - 2);
     let y = Random.int(1, stage.height - h - 2);
 
