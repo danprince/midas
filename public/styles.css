@@ -16,6 +16,7 @@ body {
   overflow: hidden;
   image-rendering: pixelated;
   user-select: none;
+  cursor: url(/assets/cursor.png), none;
 }
 
 #viewport {
@@ -27,7 +28,6 @@ body {
 #viewport canvas {
   display: block;
   transform-origin: top left;
-  cursor: none;
   position: absolute;
 }
 

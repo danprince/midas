@@ -148,8 +148,6 @@ export class RenderingSystem extends System {
     this.renderParticles();
 
     ctx.restore();
-
-    this.renderCursor();
   }
 
   clear() {
@@ -264,13 +262,5 @@ export class RenderingSystem extends System {
     }
 
     ctx.restore();
-  }
-
-  renderCursor() {
-    this.drawSprite(
-      7,
-      game.pointer.x / config.tileWidth / this.scale,
-      game.pointer.y / config.tileHeight / this.scale
-    );
   }
 }
