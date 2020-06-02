@@ -10,7 +10,60 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
   <body>
-    <div id="viewport">
+    <div id="menu-screen" class="screen">
+      <img src="/sprites/title.png" />
+      <center>
+        <div>
+          <img src="/sprites/caret_right.png" />
+          Continue
+          <img src="/sprites/caret_left.png" />
+        </div>
+        <div>New Game</div>
+        <div>Load Game</div>
+      </center>
+    </div>
+    <div id="game-screen" class="viewport screen">
+      <div class="hud top-left" style="position: fixed; z-index: 10; padding: 24px">
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <div style="height: 105px; width: 105px; background: url(/sprites/portrait_background.png); display: flex; align-items: center; justify-content: center">
+            <img src="/sprites/midas_face_1.png" />
+          </div>
+
+          <div style="display: flex; height: 24px; position: relative; top: -16px">
+            <div class="outline" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center">
+              90/100
+            </div>
+            <div style="height: 100%; width: 9px; background: url(/sprites/red_bar_start.png)"></div>
+            <div style="height: 100%; width: 200px; background: url(/sprites/red_bar_filled.png)"></div>
+            <div style="height: 100%; width: 20px; background: url(/sprites/red_bar_empty.png)"></div>
+            <div style="height: 100%; width: 9px; background: url(/sprites/red_bar_end.png)"></div>
+          </div>
+          <div style="display: flex; height: 24px; position: relative; top: -16px">
+            <div class="outline" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center">
+              20/49
+            </div>
+            <div style="height: 100%; width: 9px; background: url(/sprites/gold_bar_start.png)"></div>
+            <div style="height: 100%; width: 100px; background: url(/sprites/gold_bar_filled.png)"></div>
+            <div style="height: 100%; width: 120px; background: url(/sprites/gold_bar_empty.png)"></div>
+            <div style="height: 100%; width: 9px; background: url(/sprites/gold_bar_end.png)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="hud top-right" style="position: fixed; right: 0; z-index: 10; padding: 24px">
+        <div style="display: flex; align-items: flex-start">
+          <div style="display: flex; align-items: center">
+            <img src="/sprites/icon_coin.png" />
+            <span class="outline">100</span>
+          </div>
+        </div>
+      </div>
+      <div class="hud bottom" style="position: fixed; bottom: 0; left: 0; right: 0; display: flex; justify-content: center; z-index: 10; padding: 16px">
+        <div style="margin: 8px; width: 48px; height: 48px; background: url(/sprites/item_slot_active.png);">
+          <div style="width: 16px; height: 16px; background: url(/sprites/atlas.png); background-position: -16px 144px; transform: scale(3); transform-origin: top left"></div>
+        </div>
+        <div style="margin: 8px; width: 48px; height: 48px; background: url(/sprites/item_slot_empty.png);">
+        </div>
+      </div>
       <canvas id="renderer"></canvas>
     </div>
     <script type="module" src="/_dist_/index.js"></script>

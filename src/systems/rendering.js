@@ -14,7 +14,7 @@ export class RenderingSystem extends System {
 
     this.ctx = this.canvas.getContext("2d");
     this.sprites = new Image();
-    this.sprites.src = "assets/sprites.png";
+    this.sprites.src = "/sprites/atlas.png";
 
     // Horizontal flip version of sprites
     this.flippedSprites = document.createElement("canvas");
