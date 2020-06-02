@@ -92,7 +92,7 @@ export class RenderingSystem extends System {
   /**
    * Calculate the current viewport in grid coordinates.
    */
-  getViewport() {
+  calculateViewport() {
     let camera = game.camera;
     let canvasGridWidth = Math.ceil(this.canvas.width / config.tileWidth);
     let canvasGridHeight = Math.ceil(this.canvas.height / config.tileHeight);
@@ -140,7 +140,7 @@ export class RenderingSystem extends System {
     );
 
     // Only need to calculate the current viewport once per render
-    this.viewport = this.getViewport();
+    this.viewport = this.calculateViewport();
 
     this.renderTiles();
     this.renderObjects();
