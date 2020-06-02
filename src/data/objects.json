@@ -46,6 +46,12 @@
     "canBePushed": true,
     "canBeTransmuted": true
   },
+  "wall": {
+    "extends": ["large"],
+    "sprite": 34,
+    "canBeTransmuted": true,
+    "canBePushed": false
+  },
   "coins": {
     "sprite": 120,
     "canBePushed": true,

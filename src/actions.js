@@ -181,10 +181,16 @@ export function transmute(object) {
   object.transmuted = true;
   object.ai = null;
   object.shadow = false;
-  object.canBePushed = true;
+
   object.canBeAttacked = false;
   object.canJump = false;
-  object.mobile = false;
+
+  // Golden statues can be pushed if they were originally mobile.
+  // Don't want transmuted walls to become pushable though
+  if (object.mobile) {
+    object.mobile = false;
+    object.canBePushed = true;
+  }
 
   // TODO: Allow objects to specify which sprite they transmute into
   object.sprite += 1;
