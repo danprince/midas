@@ -40,15 +40,15 @@ export function crush(object) {
 
 /**
  * @param {GameObject} object
- * @param {number} dx
- * @param {number} dy
- * TODO: Convert to direction
+ * @param {Direction} direction
  */
-export function move(object, dx, dy) {
+export function move(object, direction) {
+  let [dx, dy] = Direction.toVector(direction);
+
   let tx = object.x + dx;
   let ty = object.y + dy;
 
-  object.direction = Direction.cardinalFromVector([dx, dy]);
+  object.direction = direction;
 
   if (object.mobile) {
     if (object.direction === Direction.WEST) {
@@ -88,7 +88,7 @@ export function move(object, dx, dy) {
   }
 
   if (target && (object.canPush || object.canBePushed) && target.canBePushed) {
-    let result = move(target, dx, dy);
+    let result = move(target, direction);
 
     if (result) {
       systems.audio.play("blockMove");

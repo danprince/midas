@@ -1,4 +1,5 @@
 import * as Easings from "silmarils/easing";
+import { Direction } from "silmarils";
 
 import config from "./config.js";
 import { Screen } from "./game.js";
@@ -70,16 +71,16 @@ export class GameScreen extends Screen {
 
       switch (event.key) {
         case config.keyMoveLeft:
-          success = Actions.move(game.player, -1, 0);
+          success = Actions.move(game.player, Direction.WEST);
           break;
         case config.keyMoveRight:
-          success = Actions.move(game.player, 1, 0);
+          success = Actions.move(game.player, Direction.EAST);
           break;
         case config.keyMoveUp:
-          success = Actions.move(game.player, 0, -1);
+          success = Actions.move(game.player, Direction.NORTH);
           break;
         case config.keyMoveDown:
-          success = Actions.move(game.player, 0, 1);
+          success = Actions.move(game.player, Direction.SOUTH);
           break;
         case config.keyRest:
           success = true;
