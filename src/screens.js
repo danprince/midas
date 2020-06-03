@@ -1,5 +1,6 @@
 import * as Easings from "silmarils/easing";
 
+import config from "./config.js";
 import { Screen } from "./game.js";
 import * as Actions from "./actions.js";
 import * as Levels from "./levels.js";
@@ -52,6 +53,9 @@ export class GameScreen extends Screen {
     systems.camera.update();
   }
 
+  /**
+   * @param {Event} event
+   */
   handleInput(event) {
     if (event instanceof MouseEvent) {
       let rect = systems.render.canvas.getBoundingClientRect();
@@ -65,43 +69,21 @@ export class GameScreen extends Screen {
       let success = false;
 
       switch (event.key) {
-        case "ArrowLeft":
+        case config.keyMoveLeft:
           success = Actions.move(game.player, -1, 0);
           break;
-        case "ArrowRight":
+        case config.keyMoveRight:
           success = Actions.move(game.player, 1, 0);
           break;
-        case "ArrowUp":
+        case config.keyMoveUp:
           success = Actions.move(game.player, 0, -1);
           break;
-        case "ArrowDown":
+        case config.keyMoveDown:
           success = Actions.move(game.player, 0, 1);
           break;
-        case "r":
+        case config.keyRest:
           success = true;
           break;
-
-        case "s":
-          save();
-          break;
-
-        case "l":
-          load();
-          break;
-
-        case "n":
-          this.startNewGame();
-          break;
-
-        case "-": {
-          game.camera.z -= 1;
-          break;
-        }
-
-        case "+": {
-          game.camera.z += 1;
-          break;
-        }
       }
 
       if (success) {
