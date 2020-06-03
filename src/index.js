@@ -7,6 +7,7 @@ import { CameraSystem } from "./systems/camera.js";
 import { ParticleSystem } from "./systems/particles.js";
 import { RenderingSystem } from "./systems/rendering.js";
 import { TweenSystem } from "./systems/tween.js";
+import { UISystem } from "./systems/ui.js";
 
 window.systems = {
   ai: new AISystem(),
@@ -16,6 +17,7 @@ window.systems = {
   particle: new ParticleSystem(),
   render: new RenderingSystem(),
   tween: new TweenSystem(),
+  ui: new UISystem(),
 };
 
 window.game = new Game();

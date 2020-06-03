@@ -95,6 +95,11 @@ body {
   width: 9px;
 }
 
+.bar-track {
+  width: 200px;
+  display: flex;
+}
+
 .bar-label {
   position: absolute;
   top: 50%;

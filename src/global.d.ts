@@ -10,6 +10,7 @@ declare var systems: {
   particle: import("./systems/particles").ParticleSystem,
   render: import("./systems/rendering").RenderingSystem,
   tween: import("./systems/tween").TweenSystem,
+  ui: import("./systems/ui").UISystem,
 }
 
 declare interface GameObject {
