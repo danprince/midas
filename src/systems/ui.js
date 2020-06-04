@@ -1,7 +1,7 @@
 import { System } from "../game.js";
 
 /**
- * @type {typeof document.querySelector}
+ * @type {(selector: string) => HTMLElement}
  */
 let $ = selector => document.querySelector(selector);
 
@@ -11,6 +11,10 @@ let $ = selector => document.querySelector(selector);
 let $all = selector => Array.from(document.querySelectorAll(selector));
 
 export class UISystem extends System {
+  /**
+   * @param {number} value
+   * @param {number} maxValue
+   */
   setHealth(value, maxValue) {
     let percent = value / maxValue * 100;
     $("#hud-health-bar .bar-label").innerText = `${value}/${maxValue}`;
@@ -18,13 +22,17 @@ export class UISystem extends System {
     $("#hud-health-bar .bar-empty").style.width = `${100 - percent}%`;
   }
 
+  /**
+   * @param {number} value
+   * @param {number} maxValue
+   */
   setSanity(value, maxValue) {
     let percent = value / maxValue * 100;
     $("#hud-sanity-bar .bar-label").innerText = `${value}/${maxValue}`;
     $("#hud-sanity-bar .bar-filled").style.width = `${percent}%`;
     $("#hud-sanity-bar .bar-empty").style.width = `${100 - percent}%`;
 
-    let portrait = $("#hud-midas-face");
+    let portrait = /** @type {HTMLImageElement} */($("#hud-midas-face"));
 
     if (percent === 100) {
       portrait.src = "/sprites/midas_face_1.png";
@@ -39,14 +47,23 @@ export class UISystem extends System {
     }
   }
 
+  /**
+   * @param {string} name
+   */
   setLocation(name) {
     $("#hud-location").innerText = name;
   }
 
+  /**
+   * @param {number} coins
+   */
   setCoins(coins) {
-    $("#hud-coins-label").innerText = coins;
+    $("#hud-coins-label").innerText = String(coins);
   }
 
+  /**
+   * @param {number} index
+   */
   setActiveItem(index) {
     let activeSlot = $(".hud-item-slot-active");
 
@@ -63,12 +80,19 @@ export class UISystem extends System {
     }
   }
 
+  /**
+   * @param {number} index
+   * @param {number} sprite
+   */
   setItemSlot(index, sprite) {
     let itemSlots = $all(".hud-item-slot");
 
     let itemSlot = itemSlots[index];
 
     if (itemSlot) {
+      /**
+       * @type {HTMLElement}
+       */
       let item = itemSlot.querySelector(".hud-item");
       let x = sprite % 10;
       let y = sprite / 10 | 0;
