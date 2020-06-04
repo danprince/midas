@@ -26,7 +26,7 @@ export class CombatSystem {
 
     if (target.health <= 0) {
       if (target.canBeTransmuted) {
-        systems.transmutation.transmuteObject(target);
+        systems.transmutation.transmuteObject(target, object);
       } else {
         game.stage.remove(target);
       }

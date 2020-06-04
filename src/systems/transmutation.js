@@ -4,8 +4,9 @@ export class TransmutationSystem {
   /**
    * @param {number} x
    * @param {number} y
+   * @param {GameObject} [transmuter]
    */
-  transmuteTile(x, y) {
+  transmuteTile(x, y, transmuter) {
     let tile = game.stage.getTile(x, y);
 
     switch (tile) {
@@ -17,9 +18,15 @@ export class TransmutationSystem {
         return;
     }
 
-    let coins = RNG.int(3, 7);
+    if (transmuter) {
+      transmuter.coins += 1;
+    }
 
-    //game.player.coins += coins;
+    if (transmuter === game.player) {
+      systems.ui.setCoins(transmuter.coins);
+    }
+
+    let coins = RNG.int(3, 7);
 
     for (let i = 0; i < coins; i++) {
       systems.particle.add({
@@ -42,8 +49,9 @@ export class TransmutationSystem {
 
   /**
    * @param {GameObject} object
+   * @param {GameObject} [transmuter]
    */
-  transmuteObject(object) {
+  transmuteObject(object, transmuter) {
     object.transmuted = true;
     object.ai = null;
     object.shadow = false;
@@ -56,6 +64,14 @@ export class TransmutationSystem {
     if (object.mobile) {
       object.mobile = false;
       object.canBePushed = true;
+    }
+
+    if (transmuter) {
+      transmuter.coins += 1;
+    }
+
+    if (transmuter === game.player) {
+      systems.ui.setCoins(transmuter.coins);
     }
 
     // TODO: Allow objects to specify which sprite they transmute into

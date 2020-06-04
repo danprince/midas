@@ -44,7 +44,7 @@ export class MovementSystem {
       // can't transmute living objects
       !target.health
     ) {
-      systems.transmutation.transmuteObject(target);
+      systems.transmutation.transmuteObject(target, object);
     }
 
     if (target && object.canAttack && target.canBeAttacked) {
@@ -90,9 +90,8 @@ export class MovementSystem {
         }
       },
       done() {
-        // TODO: Can object make this tile gold?
-        if (object === game.player) {
-          systems.transmutation.transmuteTile(tx, ty);
+        if (object.canTransmute) {
+          systems.transmutation.transmuteTile(tx, ty, object);
         }
       },
     });
