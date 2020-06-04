@@ -79,12 +79,12 @@
   "medusa": {
     "extends": ["gorgon"],
     "sprite": 50,
-    "hp": 3
+    "health": 3
   },
   "cyclops": {
     "extends": ["large", "monster"],
     "sprite": 52,
-    "hp": 3,
+    "health": 3,
     "canPush": true
   },
   "vampire": {
@@ -108,7 +108,7 @@
   },
   "hoplite": {
     "extends": ["human"],
-    "hp": 1,
+    "health": 1,
     "sprite": 90
   },
   "hoplite-spearman": {

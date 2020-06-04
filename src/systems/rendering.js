@@ -226,7 +226,7 @@ export class RenderingSystem extends System {
     ctx.restore();
 
     if (object !== game.player) {
-      for (let i = 0; i < object.hp; i++) {
+      for (let i = 0; i < object.health; i++) {
         this.drawSprite(15, object.x + i * 6 / 16, object.y + 0.2, 5 / 16, 5 / 16);
       }
     }
