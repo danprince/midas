@@ -11,6 +11,7 @@ import { UISystem } from "./systems/ui.js";
 import { CombatSystem } from "./systems/combat.js";
 import { TransmutationSystem } from "./systems/transmutation.js";
 import { MovementSystem } from "./systems/movement.js";
+import { VitalitySystem } from "./systems/vitality.js";
 
 window.systems = {
   ai: new AISystem(),
@@ -24,6 +25,7 @@ window.systems = {
   tween: new TweenSystem(),
   transmutation: new TransmutationSystem(),
   ui: new UISystem(),
+  vitality: new VitalitySystem(),
 };
 
 window.game = new Game();

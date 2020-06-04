@@ -7,9 +7,17 @@ export class CombatSystem {
    * @return
    */
   attack(object, target) {
-    target.health -= 1;
+    systems.vitality.damage(target, 1);
 
     target.stun = 1;
+
+    if (target.health <= 0) {
+      if (object.canTransmute && target.canBeTransmuted) {
+        systems.transmutation.transmuteObject(target, object);
+      } else {
+        game.stage.remove(target);
+      }
+    }
 
     systems.audio.play("slash");
 
@@ -23,13 +31,5 @@ export class CombatSystem {
       z: 1,
       flipX: object.direction === Direction.WEST
     });
-
-    if (target.health <= 0) {
-      if (target.canBeTransmuted) {
-        systems.transmutation.transmuteObject(target, object);
-      } else {
-        game.stage.remove(target);
-      }
-    }
   }
 }

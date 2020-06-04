@@ -1,4 +1,8 @@
 {
+  "being": {
+    "health": 1,
+    "maxHealth": 1
+  },
   "mobile": {
     "canJump": true,
     "mobile": true,
@@ -7,13 +11,14 @@
     "canBeCrushed": true
   },
   "human": {
-    "extends": ["mobile"],
+    "extends": ["being", "mobile"],
     "canBeAttacked": true,
     "sprite": 84,
     "ai": "wander"
   },
   "monster": {
-    "extends": ["mobile"],
+    "extends": ["being", "mobile"],
+    "canAttack": true,
     "canBeAttacked": true,
     "ai": "wander"
   },

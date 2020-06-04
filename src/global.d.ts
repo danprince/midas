@@ -11,6 +11,7 @@ declare var systems: {
   movement: import("./systems/movement").MovementSystem,
   particle: import("./systems/particles").ParticleSystem,
   render: import("./systems/rendering").RenderingSystem,
+  vitality: import("./systems/vitality").VitalitySystem,
   transmutation: import("./systems/transmutation").TransmutationSystem,
   tween: import("./systems/tween").TweenSystem,
   ui: import("./systems/ui").UISystem,
