@@ -24,7 +24,12 @@
     "canBeTransmuted": false,
     "ai": null,
     "canAttack": true,
-    "canPush": true
+    "canPush": true,
+    "health": 7,
+    "maxHealth": 10,
+    "sanity": 10,
+    "maxSanity": 10,
+    "coins": 0
   },
   "zoe": {
     "extends": ["human"],

@@ -16,6 +16,10 @@ export class GameScreen extends Screen {
       this.startNewGame();
     }
 
+    systems.ui.setHealth(game.player.health, game.player.maxHealth);
+    systems.ui.setSanity(game.player.sanity, game.player.maxSanity);
+    systems.ui.setCoins(game.player.coins);
+
     onbeforeunload = () => save();
   }
 

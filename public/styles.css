@@ -95,9 +95,18 @@ body {
   width: 9px;
 }
 
+.bar-filled, .bar-empty {
+  transition: width 200ms;
+}
+
+.bar-filled {
+  width: 100%;
+}
+
 .bar-track {
   width: 200px;
   display: flex;
+  overflow: hidden;
 }
 
 .bar-label {
