@@ -7,8 +7,11 @@ declare var systems: {
   animation: import("./systems/animation").AnimationSystem,
   audio: import("./systems/audio").AudioSystem,
   camera: import("./systems/camera").CameraSystem,
+  combat: import("./systems/combat").CombatSystem,
+  movement: import("./systems/movement").MovementSystem,
   particle: import("./systems/particles").ParticleSystem,
   render: import("./systems/rendering").RenderingSystem,
+  transmutation: import("./systems/transmutation").TransmutationSystem,
   tween: import("./systems/tween").TweenSystem,
   ui: import("./systems/ui").UISystem,
 }

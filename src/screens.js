@@ -3,7 +3,6 @@ import { Direction } from "silmarils";
 
 import config from "./config.js";
 import { Screen } from "./game.js";
-import * as Actions from "./actions.js";
 import * as Levels from "./levels.js";
 import { save, load } from "./storage.js";
 import { build } from "./registry.js";
@@ -41,7 +40,7 @@ export class GameScreen extends Screen {
         game.player.jump = jump;
       },
       done() {
-        Actions.goldify(0, 0)
+        systems.transmutation.transmuteTile(0, 0)
       }
     });
   }
@@ -73,21 +72,29 @@ export class GameScreen extends Screen {
     else if (event instanceof KeyboardEvent) {
       let success = false;
 
+      /**
+       * @param {Direction} direction
+       */
+      let move = (direction) => systems.movement.move(game.player, direction);
+
       switch (event.key) {
         case config.keyMoveLeft:
-          success = Actions.move(game.player, Direction.WEST);
+          success = move(Direction.WEST);
           break;
         case config.keyMoveRight:
-          success = Actions.move(game.player, Direction.EAST);
+          success = move(Direction.EAST);
           break;
         case config.keyMoveUp:
-          success = Actions.move(game.player, Direction.NORTH);
+          success = move(Direction.NORTH);
           break;
         case config.keyMoveDown:
-          success = Actions.move(game.player, Direction.SOUTH);
+          success = move(Direction.SOUTH);
           break;
         case config.keyRest:
           success = true;
+          break;
+        case "n":
+          this.startNewGame();
           break;
       }
 

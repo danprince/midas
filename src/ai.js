@@ -1,5 +1,4 @@
 import { RNG, Direction } from "silmarils";
-import * as Actions from "./actions.js";
 
 /**
  * @param {GameObject} self
@@ -17,5 +16,5 @@ export function wander(self) {
 
   let direction = RNG.element(directions);
 
-  Actions.move(self, direction);
+  systems.movement.move(self, direction);
 }
