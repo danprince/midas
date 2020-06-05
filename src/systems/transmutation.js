@@ -22,10 +22,6 @@ export class TransmutationSystem {
       transmuter.coins += 1;
     }
 
-    if (transmuter === game.player) {
-      systems.ui.setCoins(transmuter.coins);
-    }
-
     let coins = RNG.int(3, 7);
 
     for (let i = 0; i < coins; i++) {
@@ -68,10 +64,6 @@ export class TransmutationSystem {
 
     if (transmuter) {
       transmuter.coins += 1;
-    }
-
-    if (transmuter === game.player) {
-      systems.ui.setCoins(transmuter.coins);
     }
 
     // TODO: Allow objects to specify which sprite they transmute into

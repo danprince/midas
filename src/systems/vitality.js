@@ -61,10 +61,6 @@ export class VitalitySystem {
   setHealth(object, health) {
     let { maxHealth = Infinity } = object;
     object.health = clamp(health, 0, maxHealth);
-
-    if (object === game.player) {
-      systems.ui.setHealth(game.player.health, game.player.maxHealth);
-    }
   }
 
   /**
@@ -74,10 +70,6 @@ export class VitalitySystem {
   setSanity(object, sanity) {
     let { maxSanity = Infinity } = object;
     object.sanity = clamp(sanity, 0, maxSanity);
-
-    if (object === game.player) {
-      systems.ui.setSanity(game.player.sanity, game.player.maxSanity);
-    }
   }
 }
 
