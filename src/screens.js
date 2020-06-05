@@ -23,6 +23,7 @@ export class GameScreen extends Screen {
   }
 
   startNewGame() {
+    game.objectId = 0;
     game.stage = Levels.sandbox();
     game.player = build("midas");
     game.stage.add(game.player, 0, 0);
