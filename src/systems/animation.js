@@ -8,6 +8,11 @@ export class AnimationSystem extends System {
      * @type {AnimatedSprite[]}
      */
     this.animations = [];
+
+    /**
+     * @type {AnimatedText[]}
+     */
+    this.text = [];
   }
 
   /**
@@ -15,6 +20,20 @@ export class AnimationSystem extends System {
    */
   add(animation) {
     this.animations.push(animation);
+  }
+
+  /**
+   * @param {AnimatedText} text
+   */
+  addText(text) {
+    this.text.push(text);
+  }
+
+  /**
+   * @param {AnimatedText} text
+   */
+  removeText(text) {
+    this.text.splice(this.text.indexOf(text), 1);
   }
 
   /**

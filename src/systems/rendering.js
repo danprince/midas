@@ -247,6 +247,27 @@ export class RenderingSystem extends System {
         );
       }
     }
+
+    this.ctx.save();
+    this.ctx.font = "12px cweb";
+    this.ctx.fillStyle = "white";
+    this.ctx.strokeStyle = "black";
+    this.ctx.textAlign = "center";
+    this.ctx.textBaseline = "middle";
+    this.ctx.lineWidth = 3;
+
+    for (let text of systems.animation.text) {
+      if (Rectangle.contains(this.viewport, text)) {
+        let x = Math.round((text.x + 0.5) * config.tileWidth) + 0.5;
+        let y = Math.round((text.y + 0.5) * config.tileHeight) + 0.5;
+        this.ctx.globalAlpha = text.alpha;
+        this.ctx.fillStyle = text.color || "white";
+        this.ctx.strokeText(text.text, x, y);
+        this.ctx.fillText(text.text, x, y);
+      }
+    }
+
+    this.ctx.restore();
   }
 
   renderParticles() {

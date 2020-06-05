@@ -82,6 +82,14 @@ declare interface AnimatedSprite {
   flipX?: boolean,
 }
 
+declare interface AnimatedText {
+  x: number,
+  y: number,
+  text: string,
+  color?: string,
+  alpha?: number,
+}
+
 type Easing = (t: number) => number;
 
 declare interface TweenState {
