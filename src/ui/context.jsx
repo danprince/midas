@@ -1,5 +1,5 @@
 import { h, createContext } from "preact";
-import { useState, useContext, useEffect } from "preact/hooks";
+import { useState, useContext, useEffect, useRef } from "preact/hooks";
 
 /**
  * @type {preact.Context<UIContext>}
@@ -51,8 +51,8 @@ export function Provider({ children, initialScreen, initialScreenProps }) {
     { component: initialScreen, props: initialScreenProps }
   ]);
 
-  let [updateListeners, setUpdateListeners] = useState([]);
-  let [inputListeners, setInputListeners] = useState([]);
+  let updateListenersRef = useRef([]);
+  let inputListenersRef = useRef([]);
 
   /**
    * @type {UIContext}
@@ -78,26 +78,28 @@ export function Provider({ children, initialScreen, initialScreenProps }) {
     },
 
     addUpdateListener(callback) {
-      setUpdateListeners([...updateListeners, callback]);
+      updateListenersRef.current.push(callback);
     },
 
     removeUpdateListener(callback) {
-      setUpdateListeners(updateListeners.filter(listener => listener !== callback));
+      updateListenersRef.current = updateListenersRef.current
+        .filter(listener => listener !== callback);
     },
 
     addInputListener(callback) {
-      setInputListeners([...inputListeners, callback]);
+      inputListenersRef.current.push(callback);
     },
 
     removeInputListener(callback) {
-      setInputListeners(inputListeners.filter(listener => listener !== callback));
+      inputListenersRef.current = inputListenersRef.current
+        .filter(listener => listener !== callback);
     },
 
     dispatch(event) {
       // Iterate through the listeners in reverse order so that we get
       // the ones on top of the stack first
-      for (let i = inputListeners.length - 1; i >= 0; i--) {
-        let callback = inputListeners[i];
+      for (let i = inputListenersRef.current.length - 1; i >= 0; i--) {
+        let callback = inputListenersRef.current[i];
 
         if (callback(event) === true) {
           break;
@@ -106,7 +108,7 @@ export function Provider({ children, initialScreen, initialScreenProps }) {
     },
 
     update(dt) {
-      for (let callback of updateListeners) {
+      for (let callback of updateListenersRef.current) {
         callback(dt);
       }
     },
