@@ -1,7 +1,7 @@
 {
   "being": {
-    "health": 1,
-    "maxHealth": 1
+    "health": 3,
+    "maxHealth": 3
   },
   "mobile": {
     "canJump": true,

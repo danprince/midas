@@ -1,3 +1,5 @@
+import { RNG, Easing } from "silmarils";
+
 export class VitalitySystem {
   /**
    * @param {GameObject} object
@@ -6,6 +8,50 @@ export class VitalitySystem {
    */
   damage(object, amount, attacker) {
     this.setHealth(object, object.health - amount);
+
+    let color = "red";
+    let label = amount.toString();
+
+    if (amount === 0) {
+      label = "Miss";
+      color = "white";
+    } else if (amount < 0) {
+      label = Math.abs(amount).toString();
+      color = "green";
+    }
+
+    let text = {
+      x: object.x,
+      y: object.y,
+      text: label,
+      color: color,
+      alpha: 1,
+    };
+
+    systems.tween.add({
+      from: {
+        x: object.x,
+        y: object.y - 0.5
+      },
+      to: {
+        x: object.x + RNG.float(-1, 1),
+        y: object.y + RNG.float(0, 0.5),
+      },
+      easing: {
+        x: Easing.easeOutSine,
+        y: Easing.easeOutBounce,
+      },
+      duration: 800,
+      step({ x, y }) {
+        text.x = x;
+        text.y = y;
+      },
+      done() {
+        systems.animation.removeText(text);
+      }
+    });
+
+    systems.animation.addText(text);
   }
 
   /**

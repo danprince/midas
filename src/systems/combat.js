@@ -1,4 +1,4 @@
-import { Direction } from "silmarils";
+import { RNG, Direction } from "silmarils";
 
 export class CombatSystem {
   /**
@@ -7,14 +7,16 @@ export class CombatSystem {
    * @return
    */
   attack(object, target) {
-    systems.vitality.damage(target, 1);
+    // TODO: Calculate this from the object + whatever they're holding
+    let damage = RNG.int(0, 3);
+    systems.vitality.damage(target, damage);
 
     target.stun = 1;
 
     if (target.health <= 0) {
       if (object.canTransmute && target.canBeTransmuted) {
         systems.transmutation.transmuteObject(target, object);
-      } else {
+      } else if (target !== game.player) {
         game.stage.remove(target);
       }
     }
