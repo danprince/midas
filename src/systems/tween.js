@@ -46,10 +46,18 @@ export class TweenSystem extends System {
       tween.elapsed += dt;
 
       let percent = Math.max(0, Math.min(1, tween.elapsed / tween.duration));
-      let value = tween.easing(percent);
+      let value = 0;
       let state = {};
 
+      if (typeof tween.easing === "function") {
+        value = tween.easing(percent);
+      }
+
       for (let key in tween.from) {
+        if (key in tween.easing) {
+          value = tween.easing[key](percent);
+        }
+
         let delta = tween.to[key] - tween.from[key];
         state[key] = tween.from[key] + delta * value;
       }

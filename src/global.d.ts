@@ -82,6 +82,8 @@ declare interface AnimatedSprite {
   flipX?: boolean,
 }
 
+type Easing = (t: number) => number;
+
 declare interface TweenState {
   [key: string]: number
 }
@@ -89,20 +91,14 @@ declare interface TweenState {
 declare interface TweenParams<State extends TweenState> {
   from: State,
   to: State,
-  easing: (t: number) => number,
+  easing: Easing | Record<keyof State, Easing>,
   duration: number,
   step(state: State): void,
   done?(): void,
 }
 
-declare interface Tween<State extends TweenState> {
-  from: State,
-  to: State,
-  easing: (t: number) => number,
-  duration: number,
+declare interface Tween<State extends TweenState> extends TweenParams<State>{
   elapsed: number,
-  step(state: State): void,
-  done?(): void,
 }
 
 declare interface Save {
