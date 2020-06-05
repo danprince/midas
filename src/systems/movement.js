@@ -90,6 +90,8 @@ export class MovementSystem {
         }
       },
       done() {
+        object.jump = 0;
+
         if (object.canTransmute) {
           systems.transmutation.transmuteTile(tx, ty, object);
         }
