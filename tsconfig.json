@@ -7,7 +7,9 @@
     "esModuleInterop": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "jsxFactory": "h"
   },
   "include": [
     "**/*.d.ts",

@@ -6,6 +6,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "preact": "^10.4.4",
     "silmarils": "^0.2.0"
   },
   "devDependencies": {
