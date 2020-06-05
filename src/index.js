@@ -1,5 +1,4 @@
 import { Game } from "./game.js";
-import { GameScreen } from "./screens.js";
 import { AISystem } from "./systems/ai.js";
 import { AnimationSystem } from "./systems/animation.js";
 import { AudioSystem } from "./systems/audio.js";
@@ -29,9 +28,7 @@ export let systems = {
   vitality: new VitalitySystem(),
 }
 
-export let game = new Game();
-
 window.systems = systems;
-window.game = game;
+window.game = new Game();
 
 mount();
