@@ -8,7 +8,7 @@ import config from "../config.js";
 import { Game } from "../game.js";
 import * as Levels from "../levels.js";
 import * as Commands from "../commands.js";
-import { load } from "../storage.js";
+import { load, save } from "../storage.js";
 import { build } from "../registry.js";
 
 export function MainMenuScreen() {
@@ -65,6 +65,10 @@ export function GameScreen() {
   useEffect(() => {
     let timer = Timers.animation(dt => game.update(dt));
     return () => timer.stop();
+  }, []);
+
+  useEffect(() => {
+    onbeforeunload = () => save();
   }, []);
 
   useInputHandler(event => {
