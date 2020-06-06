@@ -38,6 +38,14 @@ declare interface GameObject {
   canBeTransmuted?: boolean,
 }
 
+type CommandHandler<T> = (object: GameObject, payload: T) => boolean;
+
+type Command<T = any> = {
+  type: string,
+  payload: T,
+  time: number,
+}
+
 declare type AI = string | { type: string, [key: string]: any };
 
 declare interface Particle {

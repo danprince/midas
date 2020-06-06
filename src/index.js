@@ -10,7 +10,6 @@ import { CombatSystem } from "./systems/combat.js";
 import { TransmutationSystem } from "./systems/transmutation.js";
 import { MovementSystem } from "./systems/movement.js";
 import { VitalitySystem } from "./systems/vitality.js";
-import { TurnSystem } from "./systems/turn.js";
 import { mount } from "./ui/root.jsx";
 
 export let systems = {
@@ -24,7 +23,6 @@ export let systems = {
   render: new RenderingSystem(),
   tween: new TweenSystem(),
   transmutation: new TransmutationSystem(),
-  turn: new TurnSystem(),
   vitality: new VitalitySystem(),
 }
 

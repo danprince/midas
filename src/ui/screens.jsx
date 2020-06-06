@@ -7,6 +7,7 @@ import { Link, SanityPortrait, HudBar, HudItemSlot } from "./components.jsx";
 import config from "../config.js";
 import { Game } from "../game.js";
 import * as Levels from "../levels.js";
+import * as Commands from "../commands.js";
 import { load } from "../storage.js";
 import { build } from "../registry.js";
 
@@ -67,37 +68,26 @@ export function GameScreen() {
   }, []);
 
   useInputHandler(event => {
-    let success = false;
-
-    /**
-      * @param {Direction} direction
-      */
-    let move = (direction) => systems.movement.move(game.player, direction);
-
     if (event instanceof KeyboardEvent) {
       switch (event.key) {
         case config.keyCancel:
           setScreen(<MainMenuScreen />);
           break;
         case config.keyLeft:
-          success = move(Direction.WEST);
+          game.dispatch(Commands.move, Direction.WEST);
           break;
         case config.keyRight:
-          success = move(Direction.EAST);
+          game.dispatch(Commands.move, Direction.EAST);
           break;
         case config.keyUp:
-          success = move(Direction.NORTH);
+          game.dispatch(Commands.move, Direction.NORTH);
           break;
         case config.keyDown:
-          success = move(Direction.SOUTH);
+          game.dispatch(Commands.move, Direction.SOUTH);
           break;
         case config.keyRest:
-          success = true;
+          game.dispatch(Commands.rest);
           break;
-      }
-
-      if (success) {
-        systems.turn.update();
       }
     }
 

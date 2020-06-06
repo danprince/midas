@@ -1,5 +1,6 @@
 import { Stage } from "./stage.js";
 import config from "./config.js";
+import * as Commands from "./commands.js";
 
 export class Game {
   constructor() {
@@ -20,6 +21,11 @@ export class Game {
     this.timer = null;
 
     this.objectId = 0;
+
+    /**
+     * @type {Command[]}
+     */
+    this.commands = [];
   }
 
   getNextObjectId() {
@@ -66,6 +72,50 @@ export class Game {
     systems.particle.update(dt);
     systems.animation.update(dt);
     systems.tween.update(dt);
+  }
+
+  turn() {
+    systems.ai.update();
+    systems.camera.update();
+  }
+
+  /**
+   * @template T
+   * @param {CommandHandler<T>} handler
+   * @param {T} [payload]
+   * @return {boolean}
+   */
+  dispatch(handler, payload) {
+    /**
+     * @type {Command<T>}
+     */
+    let command = {
+      time: Date.now(),
+      type: handler.name,
+      payload,
+    };
+
+    this.commands.push(command);
+
+    return this.executeCommand(command);
+  }
+
+  /**
+   * @private
+   * @param {Command} command
+   * @return {boolean}
+   */
+  executeCommand(command) {
+    let handler = Commands[command.type];
+    let result = handler(game.player, command.payload);
+
+    // If the command was executed succesfully, then update the state
+    // of the world.
+    if (result) {
+      this.turn();
+    }
+
+    return result;
   }
 }
 
