@@ -76,29 +76,31 @@ export function GameScreen() {
       */
     let move = (direction) => systems.movement.move(game.player, direction);
 
-    switch (event.key) {
-      case config.keyCancel:
-        setScreen(MainMenuScreen);
-        break;
-      case config.keyLeft:
-        success = move(Direction.WEST);
-        break;
-      case config.keyRight:
-        success = move(Direction.EAST);
-        break;
-      case config.keyUp:
-        success = move(Direction.NORTH);
-        break;
-      case config.keyDown:
-        success = move(Direction.SOUTH);
-        break;
-      case config.keyRest:
-        success = true;
-        break;
-    }
+    if (event instanceof KeyboardEvent) {
+      switch (event.key) {
+        case config.keyCancel:
+          setScreen(<MainMenuScreen />);
+          break;
+        case config.keyLeft:
+          success = move(Direction.WEST);
+          break;
+        case config.keyRight:
+          success = move(Direction.EAST);
+          break;
+        case config.keyUp:
+          success = move(Direction.NORTH);
+          break;
+        case config.keyDown:
+          success = move(Direction.SOUTH);
+          break;
+        case config.keyRest:
+          success = true;
+          break;
+      }
 
-    if (success) {
-      systems.turn.update();
+      if (success) {
+        systems.turn.update();
+      }
     }
 
     return true;
