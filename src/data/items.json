@@ -1,0 +1,13 @@
+{
+  "weapon": {
+    "damage": [0, 0],
+    "accuracy": 0
+  },
+  "sword": {
+    "extends": ["weapon"],
+    "sprite": 110,
+    "name": "Sword",
+    "damage": [1, 3],
+    "accuracy": 0.9
+  }
+}

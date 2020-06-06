@@ -38,6 +38,16 @@ declare interface GameObject {
   canBeTransmuted?: boolean,
 }
 
+declare interface Item {
+  extends?: string[],
+  id: number,
+  sprite?: number,
+  name?: string,
+  uses?: number,
+  damage?: [number, number],
+  accuracy?: number,
+}
+
 type CommandHandler<T> = (object: GameObject, payload: T) => boolean;
 
 type Command<T = any> = {

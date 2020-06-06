@@ -1,4 +1,5 @@
 import objects from "./data/objects.json";
+import items from "./data/items.json";
 
 /**
  * @type {Record<string, Partial<GameObject>>}
@@ -6,10 +7,22 @@ import objects from "./data/objects.json";
 let registry = { ...objects };
 
 /**
+ * @type {Record<string, Partial<Item>>}
+ */
+let itemRegistry = { ...items };
+
+/**
  * @param {typeof registry} objects
  */
 export function register(objects) {
   Object.assign(registry, objects);
+}
+
+/**
+ * @param {typeof itemRegistry} items
+ */
+export function registerItems(items) {
+  Object.assign(itemRegistry, items);
 }
 
 /**
@@ -51,7 +64,45 @@ export function build(id) {
 }
 
 /**
- * @param {GameObject} object
+ * @param {string} id
+ * @return {Item}
+ */
+export function buildItem(id) {
+  /**
+   * @type {Item}
+   */
+  let item = {};
+
+  /**
+   * @type {string[]}
+   */
+  let types = [];
+
+  /**
+   * @type {string[]}
+   */
+  let stack = [id];
+
+  while (stack.length) {
+    let id = stack.pop();
+    let ancestor = itemRegistry[id];
+    types.push(id);
+
+    item = { ...ancestor, ...item };
+
+    if (ancestor.extends) {
+      stack.unshift(...ancestor.extends);
+    }
+  }
+
+  item.id = game.getNextObjectId();
+  item.extends = types;
+
+  return item;
+}
+
+/**
+ * @param {GameObject | Item} object
  * @param {string} type
  * @return {boolean}
  */
