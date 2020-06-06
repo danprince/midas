@@ -40,17 +40,12 @@ export function useInputHandler(callback, deps) {
 }
 
 /**
- * @template Props
  * @param {object} props
  * @param {any} props.children
- * @param {Component<Props>} props.initialScreen
- * @param {Props} [props.initialScreenProps]
+ * @param {JSXElement} props.initialScreen
  */
-export function Provider({ children, initialScreen, initialScreenProps }) {
-  let [screens, setScreens] = useState([
-    { component: initialScreen, props: initialScreenProps }
-  ]);
-
+export function Provider({ children, initialScreen }) {
+  let [screens, setScreens] = useState([initialScreen]);
   let updateListenersRef = useRef([]);
   let inputListenersRef = useRef([]);
 
@@ -60,8 +55,7 @@ export function Provider({ children, initialScreen, initialScreenProps }) {
   let context = {
     screens,
 
-    pushScreen(component, props) {
-      let screen = { component, props };
+    pushScreen(screen) {
       setScreens([...screens, screen]);
     },
 
@@ -72,9 +66,9 @@ export function Provider({ children, initialScreen, initialScreenProps }) {
       }
     },
 
-    setScreen(component, props = {}) {
+    setScreen(screen) {
       context.popScreen();
-      context.pushScreen(component, props);
+      context.pushScreen(screen);
     },
 
     addUpdateListener(callback) {

@@ -26,15 +26,13 @@ function App() {
 
   return (
     <Fragment>
-      {screens.map(screen => {
-        return <screen.component {...screen.props} />
-      })}
+      {screens}
     </Fragment>
   );
 }
 export function mount() {
   render(
-    <Provider initialScreen={MainMenuScreen}>
+    <Provider initialScreen={<MainMenuScreen />}>
       <App />
     </Provider>,
     document.getElementById("root")

@@ -3,14 +3,15 @@ import { useUI } from "./context.jsx";
 
 /**
  * @param {object} props
- * @param {any} props.to
+ * @param {preact.ComponentType} props.to
  * @param {boolean} [props.push]
- * @param {boolean} [props.props]
  * @param {any} props.children
  * @param {any} [props.onClick]
  */
-export function Link({ to, props, push, children, onClick }) {
+export function Link({ to, push, children, onClick }) {
   let { pushScreen, setScreen } = useUI();
+
+  let screen = h(to, {});
 
   return (
     <a
@@ -20,9 +21,9 @@ export function Link({ to, props, push, children, onClick }) {
         }
 
         if (push) {
-          pushScreen(to, props);
+          pushScreen(screen);
         } else {
-          setScreen(to, props);
+          setScreen(screen);
         }
       }}
     >

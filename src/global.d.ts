@@ -107,18 +107,15 @@ declare interface Save {
   },
 }
 
-declare interface UIScreen<Props> {
-  component: import("preact").Component<Props>,
-  props: Props,
-}
-
 type Component<Props = {}> = import("preact").Component<Props>;
 
+declare type JSXElement = import("preact").JSX.Element;
+
 declare interface UIContext {
-  screens: UIScreen<any>[],
-  pushScreen<Props = {}>(component: Component<Props>, props: Props): void,
+  screens: JSXElement[],
+  pushScreen(screen: JSXElement): void,
   popScreen(): void,
-  setScreen<Props = {}>(component: Component<Props>, props?: Props): void,
+  setScreen(screen: JSXElement): void,
   addUpdateListener(callback: (dt: number) => void): void,
   removeUpdateListener(callback: (dt: number) => void): void,
   addInputListener(callback: (event: Event) => boolean): void,
