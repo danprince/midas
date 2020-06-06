@@ -1230,6 +1230,11 @@ postcss@^6.0.1:
     source-map "^0.6.1"
     supports-color "^5.4.0"
 
+preact@^10.4.4:
+  version "10.4.4"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.4.4.tgz#0bd6d759ec2f8684aaf8c63c7f076191e46528cf"
+  integrity sha512-EaTJrerceyAPatQ+vfnadoopsMBZAOY7ak9ogVdUi5xbpR8SoHgtLryXnW+4mQOwt21icqoVR1brkU2dq7pEBA==
+
 promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"

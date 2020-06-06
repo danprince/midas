@@ -6,13 +6,11 @@ export class RenderingSystem extends System {
   constructor() {
     super();
 
-    this.canvas = /** @type {HTMLCanvasElement} */ (
-      document.getElementById("renderer")
-    );
+    this.canvas = null;
+    this.ctx = null;
 
     this.scale = 3;
 
-    this.ctx = this.canvas.getContext("2d");
     this.sprites = new Image();
     this.sprites.src = "/sprites/atlas.png";
 
@@ -26,6 +24,15 @@ export class RenderingSystem extends System {
      * and tiles based on whether they are visible.
      */
     this.viewport = { x: 0, y: 0, width: 0, height: 0 };
+  }
+
+  /**
+   * @param {HTMLCanvasElement} canvas
+   */
+  init(canvas) {
+    this.canvas = canvas;
+    this.ctx = this.canvas.getContext("2d");
+    this.resizeToParent();
   }
 
   // Render the spritesheet but flipped horizontally so that we can
@@ -80,6 +87,15 @@ export class RenderingSystem extends System {
 
     // Camera z is blurry without this
     this.ctx.imageSmoothingEnabled = false;
+  }
+
+  resizeToParent() {
+    // Element width/height are 0 initially, need to wait until after
+    // layout pass.
+    requestAnimationFrame(() => {
+      let parent = this.canvas.parentElement;
+      this.resize(parent.clientWidth, parent.clientHeight);
+    });
   }
 
   getCanvasCenter() {

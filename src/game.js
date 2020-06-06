@@ -1,4 +1,3 @@
-import { Timers } from "silmarils";
 import { Stage } from "./stage.js";
 import config from "./config.js";
 
@@ -8,11 +7,6 @@ export class Game {
      * @type {Stage}
      */
     this.stage = null;
-
-    /**
-     * @type {Screen}
-     */
-    this.screen = null;
 
     this.pointer = { x: -200, y: -200 };
 
@@ -32,29 +26,11 @@ export class Game {
     return this.objectId++;
   }
 
-  start() {
-    this.timer = Timers.animation(dt => this.update(dt));
-  }
-
-  update(dt) {
-    this.screen.update(dt);
-  }
-
-  dispatch(event) {
-    this.screen.handleInput(event);
-  }
-
+  /**
+   * @param {Stage} stage
+   */
   setStage(stage) {
     this.stage = stage;
-  }
-
-  setScreen(screen) {
-    if (this.screen) {
-      this.screen.exit();
-    }
-
-    this.screen = screen;
-    this.screen.enter();
   }
 
   /**
@@ -81,21 +57,16 @@ export class Game {
     systems.camera.target = this.player;
     systems.camera.update();
   }
-}
-
-export class Screen {
-  enter() {}
-  exit() {}
 
   /**
    * @param {number} dt
    */
-  update(dt) {}
-
-  /**
-   * @param {MouseEvent | KeyboardEvent} event
-   */
-  handleInput(event) {}
+  update(dt) {
+    systems.render.update(dt);
+    systems.particle.update(dt);
+    systems.animation.update(dt);
+    systems.tween.update(dt);
+  }
 }
 
 export class Camera {

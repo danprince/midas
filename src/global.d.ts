@@ -2,20 +2,7 @@ declare type Direction = import("silmarils/direction").CardinalDirection;
 
 declare var game: import("./game").Game;
 
-declare var systems: {
-  ai: import("./systems/ai").AISystem,
-  animation: import("./systems/animation").AnimationSystem,
-  audio: import("./systems/audio").AudioSystem,
-  camera: import("./systems/camera").CameraSystem,
-  combat: import("./systems/combat").CombatSystem,
-  movement: import("./systems/movement").MovementSystem,
-  particle: import("./systems/particles").ParticleSystem,
-  render: import("./systems/rendering").RenderingSystem,
-  vitality: import("./systems/vitality").VitalitySystem,
-  transmutation: import("./systems/transmutation").TransmutationSystem,
-  tween: import("./systems/tween").TweenSystem,
-  ui: import("./systems/ui").UISystem,
-}
+declare var systems: (typeof import("./index"))["systems"];
 
 declare interface GameObject {
   extends?: string[],
@@ -118,4 +105,18 @@ declare interface Save {
     tiles: number[],
     objects: GameObject[],
   },
+}
+
+type Component<Props = {}> = import("preact").Component<Props>;
+
+declare type JSXElement = import("preact").JSX.Element;
+
+declare interface UIContext {
+  screens: JSXElement[],
+  pushScreen(screen: JSXElement): void,
+  popScreen(): void,
+  setScreen(screen: JSXElement): void,
+  addInputListener(callback: (event: Event) => boolean): void,
+  removeInputListener(callback: (event: Event) => boolean): void,
+  dispatch(event: Event): void
 }

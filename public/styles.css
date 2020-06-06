@@ -37,7 +37,7 @@ body {
   text-shadow: 3px 0 black, -3px 0 black, 0 3px black, 0 -3px black;
 }
 
-.hud.top-left {
+.hud-top-left {
   position: absolute;
   top: 24px;
   left: 24px;
@@ -46,7 +46,7 @@ body {
   align-items: center;
 }
 
-.hud.top-right {
+.hud-top-right {
   position: absolute;
   top: 24px;
   right: 24px;
@@ -55,7 +55,7 @@ body {
   align-items: center;
 }
 
-.hud.bottom {
+.hud-bottom {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -152,18 +152,18 @@ body {
   position: relative;
   width: 60px;
   height: 60px;
-  background-image: url(/sprites/item_slot_empty.png);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 8px;
+  background-image: url(/sprites/item_slot_empty.png);
 }
 
-.hud-item-slot-active {
+.hud-item-slot[data-active=true] {
   background-image: url(/sprites/item_slot_active.png);
 }
 
-.hud-item-slot-inactive {
+.hud-item-slot[data-active=false] {
   background-image: url(/sprites/item_slot_inactive.png);
 }
 
