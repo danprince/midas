@@ -9,16 +9,12 @@ export class Game {
      */
     this.stage = null;
 
-    this.pointer = { x: -200, y: -200 };
-
     /**
      * @type {GameObject}
      */
     this.player = null;
 
     this.camera = new Camera(0, 0);
-
-    this.timer = null;
 
     this.objectId = 0;
 
