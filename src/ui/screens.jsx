@@ -112,13 +112,12 @@ export function GameScreen() {
   function initRenderer(canvas) {
     if (canvas) {
       systems.render.init(canvas);
-      systems.render.resize(window.innerWidth, window.innerHeight);
     }
   }
 
   useEffect(() => {
     function handleResize() {
-      systems.render.resize(window.innerWidth, window.innerHeight);
+      systems.render.resizeToParent();
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

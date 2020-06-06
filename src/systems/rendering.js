@@ -32,6 +32,7 @@ export class RenderingSystem extends System {
   init(canvas) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
+    this.resizeToParent();
   }
 
   // Render the spritesheet but flipped horizontally so that we can
@@ -86,6 +87,15 @@ export class RenderingSystem extends System {
 
     // Camera z is blurry without this
     this.ctx.imageSmoothingEnabled = false;
+  }
+
+  resizeToParent() {
+    // Element width/height are 0 initially, need to wait until after
+    // layout pass.
+    requestAnimationFrame(() => {
+      let parent = this.canvas.parentElement;
+      this.resize(parent.clientWidth, parent.clientHeight);
+    });
   }
 
   getCanvasCenter() {
