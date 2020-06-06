@@ -47,6 +47,7 @@ export class Game {
       playerId: this.player.id,
       objectId: this.objectId,
       stage: this.stage,
+      commands: this.commands,
     };
   }
 
@@ -59,6 +60,7 @@ export class Game {
     this.stage.objects = save.stage.objects;
     this.objectId = save.objectId;
     this.player = this.stage.getObjectById(save.playerId);
+    this.commands = save.commands;
 
     systems.camera.target = this.player;
     systems.camera.update();
