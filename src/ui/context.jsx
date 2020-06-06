@@ -14,19 +14,6 @@ export function useUI() {
 }
 
 /**
- * @param {(dt: number) => void} callback
- * @param {any[]} deps
- */
-export function useUpdateEffect(callback, deps) {
-  let { addUpdateListener, removeUpdateListener } = useContext(UIContext);
-
-  useEffect(() => {
-    addUpdateListener(callback);
-    return () => removeUpdateListener(callback);
-  }, deps);
-}
-
-/**
  * @param {(event: Event) => boolean} callback
  * @param {any[]} deps
  */
@@ -46,7 +33,6 @@ export function useInputHandler(callback, deps) {
  */
 export function Provider({ children, initialScreen }) {
   let [screens, setScreens] = useState([initialScreen]);
-  let updateListenersRef = useRef([]);
   let inputListenersRef = useRef([]);
 
   /**
@@ -71,15 +57,6 @@ export function Provider({ children, initialScreen }) {
       context.pushScreen(screen);
     },
 
-    addUpdateListener(callback) {
-      updateListenersRef.current.push(callback);
-    },
-
-    removeUpdateListener(callback) {
-      updateListenersRef.current = updateListenersRef.current
-        .filter(listener => listener !== callback);
-    },
-
     addInputListener(callback) {
       inputListenersRef.current.push(callback);
     },
@@ -98,12 +75,6 @@ export function Provider({ children, initialScreen }) {
         if (callback(event) === true) {
           break;
         }
-      }
-    },
-
-    update(dt) {
-      for (let callback of updateListenersRef.current) {
-        callback(dt);
       }
     },
   };

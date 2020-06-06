@@ -57,6 +57,16 @@ export class Game {
     systems.camera.target = this.player;
     systems.camera.update();
   }
+
+  /**
+   * @param {number} dt
+   */
+  update(dt) {
+    systems.render.update(dt);
+    systems.particle.update(dt);
+    systems.animation.update(dt);
+    systems.tween.update(dt);
+  }
 }
 
 export class Camera {

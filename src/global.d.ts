@@ -116,10 +116,7 @@ declare interface UIContext {
   pushScreen(screen: JSXElement): void,
   popScreen(): void,
   setScreen(screen: JSXElement): void,
-  addUpdateListener(callback: (dt: number) => void): void,
-  removeUpdateListener(callback: (dt: number) => void): void,
   addInputListener(callback: (event: Event) => boolean): void,
   removeInputListener(callback: (event: Event) => boolean): void,
-  update(dt: number): void
   dispatch(event: Event): void
 }

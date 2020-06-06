@@ -1,11 +1,10 @@
-import { Timers } from "silmarils";
 import { h, render, Fragment } from "preact";
 import { useEffect } from "preact/hooks";
 import { Provider, useUI } from "./context.jsx";
 import { MainMenuScreen } from "./screens.jsx";
 
 function App() {
-  let { screens, dispatch, update } = useUI();
+  let { screens, dispatch } = useUI();
 
   useEffect(() => {
     window.addEventListener("keydown", dispatch);
@@ -18,11 +17,6 @@ function App() {
       window.removeEventListener("mousedown", dispatch);
     };
   }, [dispatch]);
-
-  useEffect(() => {
-    let timer = Timers.animation(update);
-    return () => timer.stop();
-  }, [update]);
 
   return (
     <Fragment>

@@ -1,7 +1,7 @@
-import { Easing, Direction } from "silmarils";
+import { Easing, Direction, Timers } from "silmarils";
 import { h } from "preact";
 import { useEffect } from "preact/hooks";
-import { useUI, useInputHandler, useUpdateEffect } from "./context.jsx";
+import { useUI, useInputHandler } from "./context.jsx";
 import { Link, SanityPortrait, HudBar, HudItemSlot } from "./components.jsx";
 
 import config from "../config.js";
@@ -61,11 +61,9 @@ export function SettingsScreen() {
 export function GameScreen() {
   let { setScreen } = useUI();
 
-  useUpdateEffect(dt => {
-    systems.render.update(dt);
-    systems.particle.update(dt);
-    systems.animation.update(dt);
-    systems.tween.update(dt);
+  useEffect(() => {
+    let timer = Timers.animation(dt => game.update(dt));
+    return () => timer.stop();
   }, []);
 
   useInputHandler(event => {
