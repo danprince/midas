@@ -99,7 +99,7 @@
   },
   "lamia": {
     "extends": ["vampire"],
-    "sprite": 72
+    "sprite": 70
   },
   "faun": {
     "extends": ["human"],
