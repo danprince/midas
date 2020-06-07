@@ -2,8 +2,7 @@
  * @type {CommandHandler<Direction>}
  */
 export function move(object, direction) {
-  systems.movement.move(object, direction);
-  return true;
+  return systems.movement.move(object, direction);
 }
 
 /**
