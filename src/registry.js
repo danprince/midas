@@ -48,6 +48,12 @@ export function build(id) {
   while (stack.length) {
     let id = stack.pop();
     let ancestor = registry[id];
+
+    if (ancestor == null) {
+      console.warn(`no template for ${id}`);
+      continue;
+    }
+
     types.push(id);
 
     object = { ...ancestor, ...object };
