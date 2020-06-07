@@ -62,7 +62,19 @@ export function Link({ to, push, children, onClick }) {
 
 export function SanityPortrait({ sanity, maxSanity }) {
   let percent = sanity / maxSanity;
-  let index = Math.ceil(percent * 5);
+  let index = 1;
+
+  if (percent === 1) {
+    index = 1;
+  } else if (percent > 0.75) {
+    index = 2;
+  } else if (percent > 0.5) {
+    index = 3;
+  } else if (percent > 0.25) {
+    index = 4
+  } else {
+    index = 5;
+  }
 
   return (
     <div class="hud-portrait">
