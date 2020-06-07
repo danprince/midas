@@ -117,6 +117,7 @@ declare interface Tween<State extends TweenState> extends TweenParams<State>{
 }
 
 declare interface Save {
+  turns: number,
   playerId: number,
   objectId: number,
   commands: Command[],

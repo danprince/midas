@@ -16,6 +16,8 @@ export class Game {
 
     this.camera = new Camera(0, 0);
 
+    this.turns = 0;
+
     this.objectId = 0;
 
     /**
@@ -48,6 +50,7 @@ export class Game {
       playerId: this.player.id,
       objectId: this.objectId,
       stage: this.stage,
+      turns: this.turns,
       commands: this.commands,
     };
   }
@@ -57,6 +60,7 @@ export class Game {
    */
   deserialize(save) {
     this.stage = new Stage(save.stage.width, save.stage.height, 0);
+    this.turns = save.turns;
     this.stage.tiles = save.stage.tiles;
     this.stage.objects = save.stage.objects;
     this.objectId = save.objectId;
@@ -82,6 +86,7 @@ export class Game {
   }
 
   turn() {
+    this.turns += 1;
     systems.ai.update();
     systems.camera.update();
   }
