@@ -20,6 +20,7 @@ export class TransmutationSystem {
 
     if (transmuter) {
       transmuter.coins += 1;
+      systems.vitality.changeSanity(transmuter, -1);
     }
 
     let coins = RNG.int(3, 7);

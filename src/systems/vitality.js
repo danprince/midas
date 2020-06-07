@@ -56,6 +56,14 @@ export class VitalitySystem {
 
   /**
    * @param {GameObject} object
+   * @param {number} amount
+   */
+  changeSanity(object, amount) {
+    this.setSanity(object, object.sanity + amount);
+  }
+
+  /**
+   * @param {GameObject} object
    * @param {number} health
    */
   setHealth(object, health) {
