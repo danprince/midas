@@ -1,5 +1,5 @@
 import { h, createContext } from "preact";
-import { useState, useContext, useEffect, useRef } from "preact/hooks";
+import { useState, useContext, useEffect, useRef, useReducer } from "preact/hooks";
 
 /**
  * @type {preact.Context<UIContext>}
@@ -25,6 +25,57 @@ export function useInputHandler(callback, deps) {
     return () => removeInputListener(callback);
   }, deps);
 }
+
+function useForceUpdate() {
+  let [, setState] = useState(0);
+  return () => setState(n => n + 1);
+}
+
+/**
+ * Hook that allows the UI to declare its data dependencies on the game.
+ * When the dependencies change (shallow equality) then the component
+ * will be forced to update.
+ *
+ * @param {() => any[]} getDeps
+ */
+export function useSync(getDeps) {
+  let depsRef = useRef([]);
+  let forceUpdate = useForceUpdate();
+
+  useEffect(() => {
+    function handleUpdate() {
+      let deps = getDeps();
+
+      if (!shallowEqual(deps, depsRef.current)) {
+        forceUpdate();
+        depsRef.current = deps;
+      }
+    }
+
+    game.addUpdateListener(handleUpdate);
+    return () => game.removeUpdateListener(handleUpdate);
+  }, [getDeps]);
+}
+
+/**
+ * @param {any[]} xs
+ * @param {any[]} ys
+ * @return {boolean}
+ */
+function shallowEqual(xs, ys) {
+  if (xs.length !== ys.length) {
+    return false;
+  }
+
+  for (let i = 0; i < xs.length; i++) {
+    if (xs[i] !== ys[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 
 /**
  * @param {object} props

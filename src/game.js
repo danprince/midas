@@ -22,6 +22,11 @@ export class Game {
      * @type {Command[]}
      */
     this.commands = [];
+
+    /**
+     * @type {((dt: number) => any)[]}
+     */
+    this.updateListeners = [];
   }
 
   getNextObjectId() {
@@ -70,6 +75,10 @@ export class Game {
     systems.particle.update(dt);
     systems.animation.update(dt);
     systems.tween.update(dt);
+
+    for (let listener of this.updateListeners) {
+      listener(dt);
+    }
   }
 
   turn() {
@@ -114,6 +123,21 @@ export class Game {
     }
 
     return result;
+  }
+
+  /**
+   * @param {(dt: number) => any} callback
+   */
+  addUpdateListener(callback) {
+    this.updateListeners.push(callback);
+  }
+
+  /**
+   * @param {(dt: number) => any} callback
+   */
+  removeUpdateListener(callback) {
+    let index = this.updateListeners.indexOf(callback);
+    this.updateListeners.splice(index, 1);
   }
 }
 

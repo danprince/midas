@@ -1,7 +1,7 @@
 import { Easing, Direction } from "silmarils";
 import { h } from "preact";
 import { useEffect } from "preact/hooks";
-import { useUI, useInputHandler } from "./context.jsx";
+import { useUI, useInputHandler, useSync } from "./context.jsx";
 import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot } from "./components.jsx";
 
 import config from "../config.js";
@@ -102,6 +102,16 @@ export function GameScreen() {
 
     return true;
   }, []);
+
+  useSync(() => [
+    game.player.sanity,
+    game.player.maxSanity,
+    game.player.health,
+    game.player.maxHealth,
+    game.player.coins,
+    game.player.items,
+    game.player.activeItemIndex,
+  ]);
 
   return (
     <div class="game-screen">
