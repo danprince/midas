@@ -59,13 +59,16 @@ export class Game {
    * @param {Save} save
    */
   deserialize(save) {
-    this.stage = new Stage(save.stage.width, save.stage.height, 0);
     this.turns = save.turns;
+    this.objectId = save.objectId;
+    this.commands = save.commands;
+
+    this.stage = new Stage(save.stage.width, save.stage.height, 0);
     this.stage.tiles = save.stage.tiles;
     this.stage.objects = save.stage.objects;
-    this.objectId = save.objectId;
+    this.stage.updateObjectIndexes();
+
     this.player = this.stage.getObjectById(save.playerId);
-    this.commands = save.commands;
 
     systems.camera.target = this.player;
     systems.camera.update();

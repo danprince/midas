@@ -70,8 +70,7 @@ export class MovementSystem {
       return false;
     }
 
-    object.x = tx;
-    object.y = ty;
+    game.stage.move(object, tx, ty)
 
     object.offsetX = -dx;
     object.offsetY = -dy;

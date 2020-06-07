@@ -195,8 +195,7 @@ export function GridCellContextMenu({ x, y, onRequestClose }) {
   });
 
   function teleport() {
-    game.player.x = x;
-    game.player.y = y;
+    game.stage.move(game.player, x, y);
   }
 
   return (

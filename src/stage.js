@@ -28,6 +28,18 @@ export class Stage {
      * @type {GameObject[]}
      */
     this.objects = [];
+
+    /**
+     * @private
+     * @type {Map<number, GameObject>}
+     */
+    this.objectsByTile = new Map();
+
+    /**
+     * @private
+     * @type {Map<number, GameObject>}
+     */
+    this.objectsById = new Map();
   }
 
   /**
@@ -47,15 +59,11 @@ export class Stage {
    * @param {number} y
    */
   add(object, x = object.x, y = object.y) {
-    if (x != null) {
-      object.x = x;
-    }
-
-    if (y != null) {
-      object.y = y;
-    }
-
+    object.x = x;
+    object.y = y;
     this.objects.push(object);
+    this.objectsByTile.set(x + y * this.width, object);
+    this.objectsById.set(object.id, object);
   }
 
   /**
@@ -63,6 +71,8 @@ export class Stage {
    */
   remove(object) {
     this.objects.splice(this.objects.indexOf(object), 1);
+    this.objectsByTile.delete(object.x + object.y * this.width);
+    this.objectsById.delete(object.id);
   }
 
   /**
@@ -93,7 +103,7 @@ export class Stage {
    * @return {GameObject}
    */
   getObjectAt(x, y) {
-    return this.objects.find(object => object.x === x && object.y === y);
+    return this.objectsByTile.get(x + y * this.width);
   }
 
   /**
@@ -101,6 +111,31 @@ export class Stage {
    * @return {GameObject}
    */
   getObjectById(id) {
-    return this.objects.find(object => object.id === id);
+    return this.objectsById.get(id);
+  }
+
+  /**
+   * @param {GameObject} object
+   * @param {number} x
+   * @param {number} y
+   */
+  move(object, x, y) {
+    let oldIndex = object.x + object.y * this.width;
+    let newIndex = x + y * this.width;
+    object.x = x;
+    object.y = y;
+    this.objectsByTile.delete(oldIndex);
+    this.objectsByTile.set(newIndex, object);
+  }
+
+  /**
+   * Reindex objects on the stage (after a stage is loaded etc)
+   */
+  updateObjectIndexes() {
+    for (let object of this.objects) {
+      let index = object.x + object.y * this.width;
+      this.objectsByTile.set(index, object);
+      this.objectsById.set(object.id, object);
+    }
   }
 }
