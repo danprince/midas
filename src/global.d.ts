@@ -27,6 +27,8 @@ declare interface GameObject {
   ai?: AI,
   stun?: number,
   transmuted?: boolean,
+  activeItemIndex?: number,
+  items?: Item[],
   canJump?: boolean,
   canAttack?: boolean,
   canBeAttacked?: boolean,

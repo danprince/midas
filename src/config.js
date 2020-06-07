@@ -11,4 +11,7 @@ export default {
   keyCancel: "Escape",
   keyAccept: "Enter",
   keyRest: "r",
+  keyItem1: "1",
+  keyItem2: "2",
+  keyItem3: "3"
 }

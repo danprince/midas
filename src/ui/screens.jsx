@@ -9,7 +9,7 @@ import { Game } from "../game.js";
 import * as Levels from "../levels.js";
 import * as Commands from "../commands.js";
 import { load, save } from "../storage.js";
-import { build } from "../registry.js";
+import { build, buildItem } from "../registry.js";
 
 export function MainMenuScreen() {
   let { setScreen } = useUI();
@@ -24,6 +24,7 @@ export function MainMenuScreen() {
     game.player = build("midas");
     game.stage.add(game.player, 0, 0);
     systems.camera.target = game.player;
+    game.player.items = [buildItem("sword")];
 
     // Drop midas in from above the map
     systems.tween.add({
@@ -92,6 +93,15 @@ export function GameScreen() {
         case config.keyRest:
           game.dispatch(Commands.rest);
           break;
+        case config.keyItem1:
+          game.dispatch(Commands.setActiveItem, 0);
+          break;
+        case config.keyItem2:
+          game.dispatch(Commands.setActiveItem, 1);
+          break;
+        case config.keyItem3:
+          game.dispatch(Commands.setActiveItem, 2);
+          break;
       }
     }
 
@@ -144,9 +154,24 @@ export function GameScreen() {
           </div>
 
           <div class="hud-bottom">
-            <HudItemSlot label="1" />
-            <HudItemSlot label="2" />
-            <HudItemSlot label="3" active />
+            <HudItemSlot
+              label="1"
+              sprite={game.player.items[0] && game.player.items[0].sprite}
+              active={game.player.activeItemIndex === 0}
+              onClick={() => game.dispatch(Commands.setActiveItem, 0)}
+            />
+            <HudItemSlot
+              label="2"
+              sprite={game.player.items[1] && game.player.items[1].sprite}
+              active={game.player.activeItemIndex === 1}
+              onClick={() => game.dispatch(Commands.setActiveItem, 1)}
+            />
+            <HudItemSlot
+              label="3"
+              sprite={game.player.items[2] && game.player.items[2].sprite}
+              active={game.player.activeItemIndex === 2}
+              onClick={() => game.dispatch(Commands.setActiveItem, 2)}
+            />
           </div>
         </div>
       </div>

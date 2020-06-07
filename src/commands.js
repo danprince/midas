@@ -12,3 +12,11 @@ export function move(object, direction) {
 export function rest(object) {
   return true;
 }
+
+/**
+ * @type {CommandHandler<number>}
+ */
+export function setActiveItem(object, index) {
+  object.activeItemIndex = index;
+  return false;
+}

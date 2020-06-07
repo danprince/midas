@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { useUI } from "./context.jsx";
+import config from "../config.js";
 
 /**
  * @param {object} props
@@ -64,17 +65,19 @@ export function HudBar({ color, value, max, children }) {
  * @param {number} [props.sprite]
  * @param {any} [props.label]
  * @param {boolean} [props.active]
+ * @param {(event: MouseEvent) => any} [props.onClick]
+ *
  */
-export function HudItemSlot({ sprite, label, active }) {
-  let x = sprite % 10;
-  let y = sprite / 10 | 0;
+export function HudItemSlot({ sprite, label, active, onClick }) {
+  let x = (sprite % 10) * config.tileWidth;
+  let y = (sprite / 10 | 0) * config.tileHeight;
 
   let style = {
     backgroundPosition: `-${x}px -${y}px`
   };
 
   return (
-    <div class="hud-item-slot" data-active={active}>
+    <div class="hud-item-slot" data-active={active} onClick={onClick}>
       <div class="hud-item" style={style}></div>
       <div class="hud-item-label outline">{label}</div>
     </div>

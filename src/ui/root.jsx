@@ -24,6 +24,7 @@ function App() {
     </Fragment>
   );
 }
+
 export function mount() {
   render(
     <Provider initialScreen={<MainMenuScreen />}>
