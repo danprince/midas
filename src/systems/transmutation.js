@@ -12,6 +12,8 @@ export class TransmutationSystem {
     switch (tile) {
       case 20:
       case 22:
+      case 24:
+      case 26:
         game.stage.setTile(x, y, tile + 1);
         break;
       default:

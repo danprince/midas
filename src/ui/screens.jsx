@@ -2,7 +2,7 @@ import { Easing, Direction } from "silmarils";
 import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { useUI, useInputHandler, useSync } from "./context.jsx";
-import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu } from "./components.jsx";
+import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu, Panel } from "./components.jsx";
 
 import config from "../config.js";
 import { Game } from "../game.js";
@@ -43,10 +43,13 @@ export function MainMenuScreen() {
 
   return (
     <div class="screen main-menu">
-      <h1>Main Menu</h1>
-      <Link to={GameScreen} onClick={loadGame}>Continue</Link>
-      <Link to={GameScreen} onClick={newGame}>New Game</Link>
-      <Link to={SettingsScreen}>Settings</Link>
+      <Panel>
+        <div style="display: flex; flex-direction: column; text-align: center">
+          <Link to={GameScreen} onClick={loadGame}>Continue</Link>
+          <Link to={GameScreen} onClick={newGame}>New Game</Link>
+          <Link to={SettingsScreen}>Settings</Link>
+        </div>
+      </Panel>
     </div>
   );
 }
@@ -54,8 +57,16 @@ export function MainMenuScreen() {
 export function SettingsScreen() {
   return (
     <div class="screen">
-      <h1>Settings</h1>
-      <Link to={MainMenuScreen}>Back</Link>
+      <Panel>
+        <strong>Settings</strong>
+        <hr />
+        <input type="text"/>
+        <hr />
+        <Link to={MainMenuScreen}>
+          <img src="/sprites/icon_arrow_left.png" />
+          Back
+        </Link>
+      </Panel>
     </div>
   );
 }
@@ -71,6 +82,7 @@ export function GameScreen() {
     if (event instanceof KeyboardEvent) {
       switch (event.key) {
         case config.keyCancel:
+          save();
           setScreen(<MainMenuScreen />);
           break;
         case config.keyLeft:

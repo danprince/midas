@@ -224,3 +224,11 @@ export function GridCellContextMenu({ x, y, onRequestClose }) {
     </GridAnchor>
   );
 }
+
+export function Panel({ children }) {
+  return (
+    <div class="panel">
+      {children}
+    </div>
+  );
+}

@@ -24,7 +24,7 @@ export function sandbox() {
     for (let y = 0; y < stage.height; y++) {
       // Chessboard
       if (x % 2 ? y % 2 : !(y % 2)) {
-        stage.setTile(x, y, 22);
+        stage.setTile(x, y, 24);
       }
 
       // Random tiles

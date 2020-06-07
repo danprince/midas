@@ -220,3 +220,55 @@ body {
   position: absolute;
   z-index: 200;
 }
+
+.panel {
+  border-image: url(/sprites/dark_paper.png) 9 fill;
+  border-image-width: 9px;
+  border-image-outset: 9px;
+  color: #9699b7;
+  padding: 16px;
+}
+
+.main-menu {
+  font-size: 28pt;
+}
+
+.main-menu a {
+  border-radius: 4px;
+  padding: 8px;
+  margin: 0 8px;
+}
+
+.main-menu a:hover {
+  color: white;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.panel hr {
+  border: 0;
+  border-bottom: solid 3px #37384a;
+  width: 100%;
+}
+
+input {
+  font: inherit;
+  border: 0;
+  border-image: url(/sprites/input.png) 3 fill;
+  border-image-width: 3px;
+  border-image-outset: 3px;
+  color: white;
+  margin: 3px;
+  caret-color: #9599b7;
+}
+
+input:focus {
+  border-image: url(/sprites/input_focus.png) 3 fill;
+  border-image-width: 3px;
+  border-image-outset: 3px;
+  outline: transparent;
+}
+
+input::selection {
+  background: black;
+  color: white;
+}
