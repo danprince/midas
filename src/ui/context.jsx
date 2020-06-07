@@ -118,11 +118,7 @@ export function Provider({ children, initialScreen }) {
     },
 
     dispatch(event) {
-      // Iterate through the listeners in reverse order so that we get
-      // the ones on top of the stack first
-      for (let i = inputListenersRef.current.length - 1; i >= 0; i--) {
-        let callback = inputListenersRef.current[i];
-
+      for (let callback of inputListenersRef.current) {
         if (callback(event) === true) {
           break;
         }
