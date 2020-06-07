@@ -161,7 +161,7 @@ export class Camera {
    * @param {number} x
    * @param {number} y
    */
-  screenToGrid(x, y) {
+  screenToExactGrid(x, y) {
     let center = systems.render.getCanvasCenter();
 
     let canvasX = x / this.scale - center.x;
@@ -173,6 +173,19 @@ export class Camera {
     return {
       x: gridX,
       y: gridY,
+    };
+  }
+
+  /**
+   * @param {number} x
+   * @param {number} y
+   */
+  screenToGrid(x, y) {
+    let gridCoords = this.screenToExactGrid(x, y);
+
+    return {
+      x: Math.floor(gridCoords.x),
+      y: Math.floor(gridCoords.y),
     };
   }
 
