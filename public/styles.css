@@ -1,6 +1,6 @@
 @font-face {
   font-family: "cweb";
-  src: url("fonts/CWEBL.TTF");
+  src: url("/fonts/cwebl.woff");
 }
 
 body {
