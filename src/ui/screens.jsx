@@ -1,8 +1,8 @@
-import { Easing, Direction, Timers } from "silmarils";
+import { Easing, Direction } from "silmarils";
 import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import { useUI, useInputHandler } from "./context.jsx";
-import { Link, SanityPortrait, HudBar, HudItemSlot } from "./components.jsx";
+import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot } from "./components.jsx";
 
 import config from "../config.js";
 import { Game } from "../game.js";
@@ -64,11 +64,6 @@ export function GameScreen() {
   let { setScreen } = useUI();
 
   useEffect(() => {
-    let timer = Timers.animation(dt => game.update(dt));
-    return () => timer.stop();
-  }, []);
-
-  useEffect(() => {
     onbeforeunload = () => save();
   }, []);
 
@@ -108,27 +103,10 @@ export function GameScreen() {
     return true;
   }, []);
 
-  /**
-   * @param {HTMLCanvasElement} canvas
-   */
-  function initRenderer(canvas) {
-    if (canvas) {
-      systems.render.init(canvas);
-    }
-  }
-
-  useEffect(() => {
-    function handleResize() {
-      systems.render.resizeToParent();
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <div class="game-screen">
       <div class="viewport">
-        <canvas ref={initRenderer} />
+        <Renderer />
         <div class="hud">
           <div class="hud-top-left">
             <SanityPortrait sanity={game.player.sanity} maxSanity={game.player.maxSanity} />

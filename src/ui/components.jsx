@@ -1,6 +1,33 @@
+import { Timers } from "silmarils";
 import { h } from "preact";
+import { useRef, useEffect } from "preact/hooks";
 import { useUI } from "./context.jsx";
 import config from "../config.js";
+
+export function Renderer() {
+  let canvasRef = useRef(/** @type {HTMLCanvasElement} */(null));
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      systems.render.init(canvasRef.current);
+    }
+  }, [canvasRef]);
+
+  useEffect(() => {
+    let resize = () => systems.render.resizeToParent();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
+  useEffect(() => {
+    let timer = Timers.animation(dt => game.update(dt));
+    return () => timer.stop();
+  }, []);
+
+  return (
+    <canvas ref={canvasRef} />
+  );
+}
 
 /**
  * @param {object} props
@@ -83,3 +110,4 @@ export function HudItemSlot({ sprite, label, active, onClick }) {
     </div>
   );
 }
+
