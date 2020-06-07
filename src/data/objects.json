@@ -121,9 +121,5 @@
   "hoplite-spearman": {
     "extends": ["hoplite"],
     "sprite": 92
-  },
-  "hoplite-captain": {
-    "extends": ["hoplite"],
-    "sprite": 94
   }
 }

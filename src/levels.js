@@ -42,7 +42,7 @@ export function sandbox() {
   for (let i = 0; i < 30; i++) {
     let id = Random.item(
       "cyclops", "lamia", "faun", "philosopher", "scholar", "hoplite",
-      "hoplite-spearman", "hoplite-captain"
+      "hoplite-spearman"
     );
 
     let x = Random.int(0, stage.width);
