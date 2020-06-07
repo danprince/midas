@@ -13,6 +13,19 @@ export class CombatSystem {
 
     target.stun = 1;
 
+    let dx = (target.x - object.x) * 0.5;
+    let dy = (target.y - object.y) * 0.5;
+
+    systems.tween.add({
+      duration: 150,
+      from: { x: dx, y: dy },
+      to: { x: 0, y: 0 },
+      step({ x, y }) {
+        object.offsetX = x;
+        object.offsetY = y;
+      }
+    });
+
     if (target.health <= 0) {
       if (object.canTransmute && target.canBeTransmuted) {
         systems.transmutation.transmuteObject(target, object);
