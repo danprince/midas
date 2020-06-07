@@ -180,3 +180,44 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.context-menu {
+  background: rgba(0, 0, 0, 0.8);
+  border: solid 3px white;
+  z-index: 200;
+  margin: 0;
+  padding: 0;
+  box-shadow: 3px 3px black;
+  max-height: 200px;
+  overflow: visible;
+}
+
+.context-menu-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 8px;
+  position: relative;
+}
+
+.context-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.context-menu .context-menu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  overflow-y: scroll;
+}
+
+.context-menu-divider {
+  border: 0;
+  height: 0;
+  border-top: solid 3px white;
+  margin: 0;
+}
+
+.grid-anchor {
+  position: absolute;
+  z-index: 200;
+}

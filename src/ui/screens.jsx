@@ -1,8 +1,8 @@
 import { Easing, Direction } from "silmarils";
 import { h } from "preact";
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { useUI, useInputHandler, useSync } from "./context.jsx";
-import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot } from "./components.jsx";
+import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu } from "./components.jsx";
 
 import config from "../config.js";
 import { Game } from "../game.js";
@@ -113,8 +113,28 @@ export function GameScreen() {
     game.player.activeItemIndex,
   ]);
 
+  let [contextMenu, setContextMenu] = useState(null);
+
+  /**
+   * @param {MouseEvent} event
+   */
+  function handleContextMenu(event) {
+    event.preventDefault();
+
+    let { x, y } = game.camera.screenToGrid(event.clientX, event.clientY);
+
+    setContextMenu(
+      <GridCellContextMenu
+        x={x}
+        y={y}
+        onRequestClose={() => setContextMenu(null)}
+      />
+    );
+  }
+
   return (
-    <div class="game-screen">
+    <div class="game-screen" onContextMenu={handleContextMenu}>
+      {contextMenu}
       <div class="viewport">
         <Renderer />
         <div class="hud">

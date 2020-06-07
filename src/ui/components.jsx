@@ -1,8 +1,10 @@
 import { Timers } from "silmarils";
 import { h } from "preact";
-import { useRef, useEffect } from "preact/hooks";
+import { useRef, useEffect, useState } from "preact/hooks";
 import { useUI } from "./context.jsx";
 import config from "../config.js";
+
+import Objects from "../data/objects.json";
 
 export function Renderer() {
   let canvasRef = useRef(/** @type {HTMLCanvasElement} */(null));
@@ -123,3 +125,103 @@ export function HudItemSlot({ sprite, label, active, onClick }) {
   );
 }
 
+export function GridAnchor({ x, y, children }) {
+  let gridCoords = game.camera.gridToScreen(x, y);
+
+  let style = {
+    left: `${gridCoords.x}px`,
+    top: `${gridCoords.y}px`,
+  };
+
+  return (
+    <div class="grid-anchor" style={style}>{children}</div>
+  );
+}
+
+/**
+ * @param {object} props
+ * @param {any} props.children
+ * @param {(event: MouseEvent) => any} [props.onRequestClose]
+ */
+export function ContextMenu({ children, onRequestClose }) {
+  return (
+    <ul class="context-menu" onMouseLeave={onRequestClose}>
+      {children}
+    </ul>
+  );
+}
+
+/**
+ * @param {object} props
+ * @param {any} props.children
+ * @param {any} [props.items]
+ * @param {(event: MouseEvent) => any} [props.onClick]
+ */
+export function ContextMenuItem({ children, items = [], onClick }) {
+  let [expanded, setExpanded] = useState(false);
+
+  return (
+    <li
+      class="context-menu-item"
+      onClick={onClick}
+      onMouseEnter={() => setExpanded(true)}
+      onMouseLeave={() => setExpanded(false)}
+    >
+      {children}
+      {expanded && items.length > 0 && (
+        <ContextMenu onRequestClose={() => setExpanded(false)}>
+          {items}
+        </ContextMenu>
+      )}
+    </li>
+  );
+}
+
+export function ContextMenuDivider() {
+  return (
+    <hr class="context-menu-divider" />
+  );
+}
+
+export function GridCellContextMenu({ x, y, onRequestClose }) {
+  let object = game.stage.getObjectAt(x, y);
+
+  let spawnMenu = Object.keys(Objects).map(id => {
+    return (
+      <ContextMenuItem onClick={() => game.stage.spawn(id, x, y)}>
+        {id}
+      </ContextMenuItem>
+    );
+  });
+
+  function teleport() {
+    game.player.x = x;
+    game.player.y = y;
+  }
+
+  return (
+    <GridAnchor x={x + 1} y={y}>
+      <ContextMenu onRequestClose={onRequestClose}>
+        <ContextMenuItem>
+          x: {x} y: {y}
+        </ContextMenuItem>
+        <ContextMenuItem onClick={teleport}>
+          Teleport
+        </ContextMenuItem>
+        <ContextMenuDivider />
+        <ContextMenuItem items={spawnMenu}>Spawn</ContextMenuItem>
+        {object && <ContextMenuDivider />}
+        {object && (
+          <ContextMenuItem
+            onClick={() => console.log(object)}
+            items={[
+              <ContextMenuItem onClick={() => game.stage.remove(object)}>Despawn</ContextMenuItem>
+            ]}
+          >
+            #{object.id}
+          </ContextMenuItem>
+        )}
+      </ContextMenu>
+    </GridAnchor>
+  );
+}
