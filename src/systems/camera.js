@@ -1,5 +1,4 @@
-import { Easing } from "silmarils";
-import { distance } from "silmarils/point";
+import { Easing, Point } from "silmarils";
 import { System } from "../game.js";
 
 export class CameraSystem extends System {
@@ -17,7 +16,7 @@ export class CameraSystem extends System {
       return;
     }
 
-    if (distance(game.camera, this.target) > 0) {
+    if (Point.distance(game.camera, this.target) > 0) {
       let originX = game.camera.x;
       let originY = game.camera.y;
       let targetX = this.target.x + 0.5;

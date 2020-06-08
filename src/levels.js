@@ -1,4 +1,4 @@
-import * as Random from "silmarils/rng";
+import { RNG } from "silmarils";
 import { Stage } from "./stage.js";
 
 export function empty() {
@@ -35,39 +35,39 @@ export function sandbox() {
   }
 
   for (let i = 0; i < 3; i++) {
-    let x = Random.int(0, stage.width);
-    let y = Random.int(0, stage.height);
+    let x = RNG.int(0, stage.width);
+    let y = RNG.int(0, stage.height);
     stage.spawn("coins", x, y);
   }
 
   for (let i = 0; i < 10; i++) {
-    let x = Random.int(0, stage.width);
-    let y = Random.int(0, stage.height);
+    let x = RNG.int(0, stage.width);
+    let y = RNG.int(0, stage.height);
     stage.spawn("column", x, y);
   }
 
   for (let i = 0; i < 10; i++) {
-    let x = Random.int(0, stage.width);
-    let y = Random.int(0, stage.height);
+    let x = RNG.int(0, stage.width);
+    let y = RNG.int(0, stage.height);
     stage.spawn("block", x, y);
   }
 
   for (let i = 0; i < 10; i++) {
-    let x = Random.int(0, stage.width);
-    let y = Random.int(0, stage.height);
+    let x = RNG.int(0, stage.width);
+    let y = RNG.int(0, stage.height);
     stage.spawn("wall", x, y);
   }
 
   stage.spawn("upstairs", 5, 5);
 
   for (let i = 0; i < 10; i++) {
-    let id = Random.item(
+    let id = RNG.item(
       "cyclops", "lamia", "faun", "philosopher", "scholar", "hoplite",
       "hoplite-spearman"
     );
 
-    let x = Random.int(0, stage.width);
-    let y = Random.int(0, stage.height);
+    let x = RNG.int(0, stage.width);
+    let y = RNG.int(0, stage.height);
 
     stage.spawn(id, x, y);
   }
