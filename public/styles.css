@@ -259,6 +259,11 @@ input {
   color: white;
   margin: 3px;
   caret-color: #9599b7;
+  cursor: url(/sprites/cursor_text.png) 12 15, none;
+}
+
+button, a {
+  cursor: url(/sprites/cursor_pointer.png) 9 3, none;
 }
 
 input:focus {
@@ -271,4 +276,28 @@ input:focus {
 input::selection {
   background: black;
   color: white;
+}
+
+[data-cursor=crosshair] {
+  cursor: url(/sprites/cursor_crosshair.png) 16 16, none;
+}
+
+[data-cursor=drag] {
+  cursor: url(/sprites/cursor_drag.png) 9 3, none;
+}
+
+[data-cursor=dragging] {
+  cursor: url(/sprites/cursor_dragging.png) 9 3, none;
+}
+
+[data-cursor=help] {
+  cursor: url(/sprites/cursor_help.png) 9 3, none;
+}
+
+[data-cursor=not-allowed] {
+  cursor: url(/sprites/cursor_not_allowed.png) 15 15, none;
+}
+
+[data-cursor=pointer] {
+  cursor: url(/sprites/cursor_pointer.png) 9 3, none;
 }
