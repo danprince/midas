@@ -103,9 +103,13 @@ export function Provider({ children, initialScreen }) {
       }
     },
 
-    setScreen(screen) {
+    replaceScreen(screen) {
       context.popScreen();
       context.pushScreen(screen);
+    },
+
+    setScreen(screen) {
+      setScreens([screen]);
     },
 
     addInputListener(callback) {
