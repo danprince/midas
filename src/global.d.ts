@@ -137,6 +137,7 @@ declare interface UIContext {
   screens: JSXElement[],
   pushScreen(screen: JSXElement): void,
   popScreen(): void,
+  replaceScreen(screen: JSXElement): void,
   setScreen(screen: JSXElement): void,
   addInputListener(callback: (event: Event) => boolean): void,
   removeInputListener(callback: (event: Event) => boolean): void,
