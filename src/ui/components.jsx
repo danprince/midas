@@ -1,5 +1,6 @@
 import { Timers } from "silmarils";
 import { h } from "preact";
+import { createPortal } from "preact/compat";
 import { useRef, useEffect, useState } from "preact/hooks";
 import { useUI } from "./context.jsx";
 import config from "../config.js";
@@ -230,5 +231,14 @@ export function Panel({ children }) {
     <div class="panel">
       {children}
     </div>
+  );
+}
+
+export function Overlay({ children }) {
+  let container = document.getElementById("portal");
+
+  return createPortal(
+    <div class="overlay">{children}</div>,
+    container,
   );
 }

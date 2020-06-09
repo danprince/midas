@@ -2,7 +2,7 @@ import { Easing, Direction } from "silmarils";
 import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { useUI, useInputHandler, useSync } from "./context.jsx";
-import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu, Panel } from "./components.jsx";
+import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu, Panel, Overlay } from "./components.jsx";
 
 import config from "../config.js";
 import { Game } from "../game.js";
@@ -72,7 +72,7 @@ export function SettingsScreen() {
 }
 
 export function GameScreen() {
-  let { setScreen } = useUI();
+  let { setScreen, pushScreen } = useUI();
 
   useEffect(() => {
     onbeforeunload = () => save();
@@ -124,6 +124,15 @@ export function GameScreen() {
     game.player.items,
     game.player.activeItemIndex,
   ]);
+
+  // TODO: Think about whether this is really the place that this should
+  // be handled. Would it make more sense for the game to monitor the
+  // game over state and message the UI or set a flag when that happens?
+  useEffect(() => {
+    if (game.player.health === 0) {
+      pushScreen(<GameOverScreen />);
+    }
+  }, [game.player.health]);
 
   let [contextMenu, setContextMenu] = useState(null);
 
@@ -196,5 +205,18 @@ export function GameScreen() {
         </div>
       </div>
     </div>
+  );
+}
+
+export function GameOverScreen() {
+  return (
+    <Overlay>
+      <Panel>
+        <h1>Game Over</h1>
+        <Link to={MainMenuScreen}>
+          Continue
+        </Link>
+      </Panel>
+    </Overlay>
   );
 }
