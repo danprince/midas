@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "clean": "rm -rf build",
     "start": "snowpack dev",
     "build": "snowpack build",
     "typecheck": "tsc --noEmit"
