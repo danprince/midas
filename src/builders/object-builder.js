@@ -2,6 +2,20 @@ import Objects from "../data/objects.json";
 
 /**
  * @param {string} id
+ * @return {ObjectTemplate}
+ */
+function getTemplate(id) {
+  let template = Objects[id];
+
+  if (template == null) {
+    throw new Error(`object template does not exist: ${id}`);
+  }
+
+  return template;
+}
+
+/**
+ * @param {string} id
  * @return {GameObject}
  */
 export function build(id) {
@@ -22,7 +36,7 @@ export function build(id) {
 
   while (stack.length) {
     let id = stack.pop();
-    let ancestor = Objects[id];
+    let ancestor = getTemplate(id);
 
     if (ancestor == null) {
       console.warn(`no template for ${id}`);

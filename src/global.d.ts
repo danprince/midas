@@ -143,3 +143,8 @@ declare interface UIContext {
   removeInputListener(callback: (event: Event) => boolean): void,
   dispatch(event: Event): void
 }
+
+declare type ObjectTemplate = Partial<GameObject>;
+
+declare type ItemTemplate = Partial<Item>;
+

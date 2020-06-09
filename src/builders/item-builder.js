@@ -2,6 +2,20 @@ import Items from "../data/items.json";
 
 /**
  * @param {string} id
+ * @return {ItemTemplate}
+ */
+function getTemplate(id) {
+  let template = Items[id];
+
+  if (template == null) {
+    throw new Error(`item template does not exist: ${id}`);
+  }
+
+  return template;
+}
+
+/**
+ * @param {string} id
  * @return {Item}
  */
 export function build(id) {
@@ -22,7 +36,7 @@ export function build(id) {
 
   while (stack.length) {
     let id = stack.pop();
-    let ancestor = Items[id];
+    let ancestor = getTemplate(id);
     types.push(id);
 
     item = { ...ancestor, ...item };
