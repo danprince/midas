@@ -6,10 +6,11 @@ import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMen
 
 import config from "../config.js";
 import { Game } from "../game.js";
+import { load, save } from "../storage.js";
 import * as Levels from "../levels.js";
 import * as Commands from "../commands.js";
-import { load, save } from "../storage.js";
-import { build, buildItem } from "../registry.js";
+import * as ObjectBuilder from "../builders/object-builder.js";
+import * as ItemBuilder from "../builders/item-builder.js";
 
 export function MainMenuScreen() {
   let { setScreen } = useUI();
@@ -21,10 +22,10 @@ export function MainMenuScreen() {
   function newGame() {
     game = new Game();
     game.stage = Levels.sandbox();
-    game.player = build("midas");
+    game.player = ObjectBuilder.build("midas");
     game.stage.add(game.player, 0, 0);
     systems.camera.target = game.player;
-    game.player.items = [buildItem("sword")];
+    game.player.items = [ItemBuilder.build("sword")];
 
     // Drop midas in from above the map
     systems.tween.add({

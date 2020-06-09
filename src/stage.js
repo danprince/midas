@@ -1,4 +1,4 @@
-import { build } from "./registry.js";
+import { build } from "./builders/object-builder.js";
 
 export class Stage {
   /**
