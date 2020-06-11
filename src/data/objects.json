@@ -81,12 +81,13 @@
     "sprite": 37
   },
   "gorgon": {
-    "extends": ["large", "monster"]
+    "extends": ["large", "monster"],
+    "health": 30,
+    "maxHealth": 30
   },
   "medusa": {
     "extends": ["gorgon"],
-    "sprite": 50,
-    "health": 3
+    "sprite": 50
   },
   "cyclops": {
     "extends": ["large", "monster"],

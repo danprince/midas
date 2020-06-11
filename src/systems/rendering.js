@@ -233,7 +233,7 @@ export class RenderingSystem extends System {
       ctx.translate(0, -object.jump * config.tileHeight);
     }
 
-    if (object.h == null || object.h === 1) {
+    if (h === 1) {
       this.drawSprite(object.sprite, object.x, object.y - 0.25, w, h, object.flipX);
     } else {
       this.drawSprite(object.sprite, object.x, object.y, w, h, object.flipX);
@@ -241,12 +241,50 @@ export class RenderingSystem extends System {
 
     ctx.restore();
 
-    if (object !== game.player) {
-      for (let i = 0; i < object.health; i++) {
-        this.drawSprite(15, object.x + i * 6 / 16, object.y + 0.2, 5 / 16, 5 / 16);
-      }
+    if (object.health) {
+      this.renderBar(
+        object === game.player ? 16 : 15,
+        object.health,
+        object.maxHealth,
+        object.x + 0.5,
+        object.y - h / 2,
+        object.h > 1 ? 24 : 16,
+      );
     }
 
+    ctx.restore();
+  }
+
+  /**
+   * @param {number} sprite
+   * @param {number} value
+   * @param {number} max
+   * @param {number} x
+   * @param {number} y
+   * @param {number} width
+   */
+  renderBar(sprite, value, max, x, y, width) {
+    let coloredWidth = width - 2;
+    let percent = value / max;
+    let filledWidth = Math.ceil(percent * coloredWidth);
+    let emptyWidth = coloredWidth - filledWidth;
+
+    let x0 = 0;
+    let x1 = x0 + 1;
+    let x2 = x1 + filledWidth;
+    let x3 = x2 + emptyWidth;
+
+    let sx = (sprite % 10) * config.tileWidth;
+    let sy = Math.floor(sprite / 10) * config.tileHeight;
+
+    let { ctx } = this;
+    ctx.save();
+    ctx.translate(x * config.tileWidth, y * config.tileHeight);
+    ctx.translate(-width / 2, -2);
+    ctx.drawImage(this.sprites, sx,     sy, 1, 4, x0, 0, 1,           4);
+    ctx.drawImage(this.sprites, sx + 1, sy, 1, 4, x1, 0, filledWidth, 4);
+    ctx.drawImage(this.sprites, sx + 2, sy, 1, 4, x2, 0, emptyWidth,  4);
+    ctx.drawImage(this.sprites, sx + 3, sy, 1, 4, x3, 0, 1,           4);
     ctx.restore();
   }
 
