@@ -42,13 +42,6 @@ export function MainMenuScreen() {
     });
   }
 
-  useEffect(() => {
-    if (hasSave()) {
-      loadGame();
-      setScreen(<GameScreen />);
-    }
-  });
-
   return (
     <div class="screen main-menu">
       <Panel>

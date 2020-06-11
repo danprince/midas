@@ -1,7 +1,8 @@
 import { h, render, Fragment } from "preact";
 import { useEffect } from "preact/hooks";
 import { Provider, useUI } from "./context.jsx";
-import { MainMenuScreen } from "./screens.jsx";
+import { MainMenuScreen, GameScreen } from "./screens.jsx";
+import { load, hasSave } from "../storage.js";
 
 function App() {
   let { screens, dispatch } = useUI();
@@ -26,8 +27,15 @@ function App() {
 }
 
 export function mount() {
+  let initialScreen = <MainMenuScreen />;
+
+  if (hasSave()) {
+    load();
+    initialScreen = <GameScreen />;
+  }
+
   render(
-    <Provider initialScreen={<MainMenuScreen />}>
+    <Provider initialScreen={initialScreen}>
       <App />
     </Provider>,
     document.getElementById("root")
