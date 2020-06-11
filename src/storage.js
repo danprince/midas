@@ -9,3 +9,7 @@ export function load() {
   let save = JSON.parse(localStorage[SAVE_KEY]);
   game.deserialize(save);
 }
+
+export function hasSave() {
+  return localStorage.getItem(SAVE_KEY) != null;
+}

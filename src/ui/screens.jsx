@@ -6,7 +6,7 @@ import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMen
 
 import config from "../config.js";
 import { Game } from "../game.js";
-import { load, save } from "../storage.js";
+import { load, save, hasSave } from "../storage.js";
 import * as Levels from "../levels.js";
 import * as Commands from "../commands.js";
 import * as ObjectBuilder from "../builders/object-builder.js";
@@ -41,6 +41,13 @@ export function MainMenuScreen() {
       }
     });
   }
+
+  useEffect(() => {
+    if (hasSave()) {
+      loadGame();
+      setScreen(<GameScreen />);
+    }
+  });
 
   return (
     <div class="screen main-menu">
