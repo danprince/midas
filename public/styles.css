@@ -81,7 +81,7 @@ body {
 }
 
 .bar {
-  height: 24px;
+  height: 18px;
   display: flex;
   position: relative;
 }
@@ -149,8 +149,8 @@ body {
 
 .hud-item-slot {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 57px;
+  height: 57px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,10 +160,6 @@ body {
 
 .hud-item-slot[data-active=true] {
   background-image: url(/sprites/item_slot_active.png);
-}
-
-.hud-item-slot[data-active=false] {
-  background-image: url(/sprites/item_slot_inactive.png);
 }
 
 .hud-item {
@@ -262,7 +258,7 @@ input {
   cursor: url(/sprites/cursor_text.png) 12 15, none;
 }
 
-button, a {
+button, a, label {
   cursor: url(/sprites/cursor_pointer.png) 9 3, none;
 }
 
@@ -313,4 +309,38 @@ input::selection {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox] + label:before {
+  content: "";
+  background-image: url(/sprites/checkbox_unchecked.png);
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+input[type=checkbox]:checked + label:before {
+  background-image: url(/sprites/checkbox_checked.png);
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio] + label:before {
+  content: "";
+  background-image: url(/sprites/radio_unchecked.png);
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+input[type=radio]:checked + label:before {
+  background-image: url(/sprites/radio_checked.png);
 }

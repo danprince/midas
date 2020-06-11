@@ -61,10 +61,22 @@ export function SettingsScreen() {
       <Panel>
         <strong>Settings</strong>
         <hr />
+        <label>Audio</label>
+        <div>
+          <input type="checkbox" id="disable_sounds" />
+          <label for="disable_sounds">Disable Sounds</label>
+        </div>
+        <div>
+          <input type="radio" id="hello" name="radio" />
+          <label for="hello">Hello radio</label>
+        </div>
+        <div>
+          <input type="radio" id="hello2" name="radio" />
+          <label for="hello2">Hello radio2</label>
+        </div>
         <input type="text"/>
         <hr />
         <Link to={MainMenuScreen}>
-          <img src="/sprites/icon_arrow_left.png" />
           Back
         </Link>
       </Panel>
