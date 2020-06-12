@@ -1,4 +1,4 @@
-import { h, createContext } from "preact";
+import { createContext } from "preact";
 import { useState, useContext, useEffect, useRef, useReducer } from "preact/hooks";
 
 /**

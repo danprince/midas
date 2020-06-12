@@ -12,7 +12,7 @@ export class RenderingSystem extends System {
     this.scale = 3;
 
     this.sprites = new Image();
-    this.sprites.src = "/sprites/atlas.png";
+    this.sprites.src = "sprites/atlas.png";
 
     // Horizontal flip version of sprites
     this.flippedSprites = document.createElement("canvas");

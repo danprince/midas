@@ -1,5 +1,4 @@
 import { Easing, Direction } from "silmarils";
-import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { useUI, useInputHandler, useSync } from "./context.jsx";
 import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu, Panel, Overlay } from "./components.jsx";
@@ -187,7 +186,7 @@ export function GameScreen() {
           <div class="hud-top-right">
             <div class="hud-stats">
               <div class="hud-stat">
-                <img src="/sprites/icon_coin.png" />
+                <img src="sprites/icon_coin.png" />
                 <span id="hud-coins-label" class="outline">
                   {game.player.coins}
                 </span>
