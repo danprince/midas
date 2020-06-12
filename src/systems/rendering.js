@@ -233,7 +233,7 @@ export class RenderingSystem extends System {
       ctx.translate(0, -object.jump * config.tileHeight);
     }
 
-    if (h === 1) {
+    if (object.mobile) {
       this.drawSprite(object.sprite, object.x, object.y - 0.25, w, h, object.flipX);
     } else {
       this.drawSprite(object.sprite, object.x, object.y, w, h, object.flipX);
@@ -247,7 +247,7 @@ export class RenderingSystem extends System {
         object.health,
         object.maxHealth,
         object.x + 0.5,
-        object.y - h / 2,
+        object.y - h + 0.75,
         object.h > 1 ? 24 : 16,
         3,
       );
