@@ -1,23 +1,23 @@
 import { System } from "../game.js";
 
-export class AudioSystem extends System {
-  static sounds = {
-    slash: new Audio("audio/slash.ogg"),
-    blockMove: new Audio("audio/blockmove.wav"),
-    coins: new Audio("audio/coins.mov"),
-  }
+const sounds = {
+  slash: new Audio("audio/slash.ogg"),
+  blockMove: new Audio("audio/blockmove.wav"),
+  coins: new Audio("audio/coins.mov"),
+}
 
+export class AudioSystem extends System {
   constructor() {
     super();
     this.volume = 0.1;
   }
 
   /**
-   * @param {keyof typeof AudioSystem["sounds"]} name
+   * @param {keyof typeof sounds} name
    */
   play(name) {
     if (this.enabled) {
-      let sound = AudioSystem.sounds[name];
+      let sound = sounds[name];
       sound.volume = this.volume;
       sound.currentTime = 0;
       sound.play();
