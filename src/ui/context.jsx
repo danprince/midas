@@ -124,6 +124,7 @@ export function Provider({ children, initialScreen }) {
     dispatch(event) {
       for (let callback of inputListenersRef.current) {
         if (callback(event) === true) {
+          event.preventDefault();
           break;
         }
       }
