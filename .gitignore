@@ -1,5 +1,3 @@
 *.log
 node_modules
-
-# snowpack output
-build
+dist
