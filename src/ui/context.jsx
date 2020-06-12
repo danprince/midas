@@ -122,6 +122,12 @@ export function Provider({ children, initialScreen }) {
     },
 
     dispatch(event) {
+      // Never want to intercept meta-key events which are probably
+      // system shortcuts.
+      if (event instanceof KeyboardEvent && event.metaKey) {
+        return;
+      }
+
       for (let callback of inputListenersRef.current) {
         if (callback(event) === true) {
           event.preventDefault();
