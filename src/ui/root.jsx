@@ -1,4 +1,4 @@
-import { h, render, Fragment } from "preact";
+import { render } from "preact";
 import { useEffect } from "preact/hooks";
 import { Provider, useUI } from "./context.jsx";
 import { MainMenuScreen, GameScreen } from "./screens.jsx";
@@ -20,9 +20,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Fragment>
+    <>
       {screens}
-    </Fragment>
+    </>
   );
 }
 

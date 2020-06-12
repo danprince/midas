@@ -1,5 +1,4 @@
 import { Easing, Direction } from "silmarils";
-import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { useUI, useInputHandler, useSync } from "./context.jsx";
 import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu, Panel, Overlay } from "./components.jsx";

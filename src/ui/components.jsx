@@ -1,5 +1,4 @@
 import { Timers } from "silmarils";
-import { h } from "preact";
 import { createPortal } from "preact/compat";
 import { useRef, useEffect, useState } from "preact/hooks";
 import { useUI } from "./context.jsx";
