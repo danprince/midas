@@ -249,6 +249,7 @@ export class RenderingSystem extends System {
         object.x + 0.5,
         object.y - h / 2,
         object.h > 1 ? 24 : 16,
+        3,
       );
     }
 
@@ -262,8 +263,9 @@ export class RenderingSystem extends System {
    * @param {number} x
    * @param {number} y
    * @param {number} width
+   * @param {number} height
    */
-  renderBar(sprite, value, max, x, y, width) {
+  renderBar(sprite, value, max, x, y, width, height) {
     let coloredWidth = width - 2;
     let percent = value / max;
     let filledWidth = Math.ceil(percent * coloredWidth);
@@ -276,15 +278,16 @@ export class RenderingSystem extends System {
 
     let sx = (sprite % 10) * config.tileWidth;
     let sy = Math.floor(sprite / 10) * config.tileHeight;
+    let sh = height;
 
     let { ctx } = this;
     ctx.save();
     ctx.translate(x * config.tileWidth, y * config.tileHeight);
     ctx.translate(-width / 2, -2);
-    ctx.drawImage(this.sprites, sx,     sy, 1, 4, x0, 0, 1,           4);
-    ctx.drawImage(this.sprites, sx + 1, sy, 1, 4, x1, 0, filledWidth, 4);
-    ctx.drawImage(this.sprites, sx + 2, sy, 1, 4, x2, 0, emptyWidth,  4);
-    ctx.drawImage(this.sprites, sx + 3, sy, 1, 4, x3, 0, 1,           4);
+    ctx.drawImage(this.sprites, sx,     sy, 1, sh, x0, 0, 1,           sh);
+    ctx.drawImage(this.sprites, sx + 1, sy, 1, sh, x1, 0, filledWidth, sh);
+    ctx.drawImage(this.sprites, sx + 2, sy, 1, sh, x2, 0, emptyWidth,  sh);
+    ctx.drawImage(this.sprites, sx + 3, sy, 1, sh, x3, 0, 1,           sh);
     ctx.restore();
   }
 
