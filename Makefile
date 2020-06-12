@@ -10,10 +10,11 @@ clean:
 	rm -rf dist
 
 build-web:
-	$(vite) build --outDir dist/web
+	$(vite) build --base ./ --outDir dist
 
 build-itch:
-	$(vite) build --base /test --outDir dist/itch
-	cd dist/itch && zip ../itch.zip *
+	mkdir -p release
+	rm -f release/itch.zip
+	cd dist && zip -r ../release/itch.zip *
 
 build: build-web build-itch

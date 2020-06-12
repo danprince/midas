@@ -1,6 +1,6 @@
 @font-face {
   font-family: "cweb";
-  src: url("/fonts/cwebl.woff");
+  src: url("fonts/cwebl.woff");
 }
 
 body {
@@ -16,7 +16,7 @@ body {
   overflow: hidden;
   image-rendering: pixelated;
   user-select: none;
-  cursor: url(/sprites/cursor.png), none;
+  cursor: url(sprites/cursor.png), none;
 }
 
 .viewport {
@@ -74,7 +74,7 @@ body {
   position: relative;
   width: 105px;
   height: 105px;
-  background-image: url(/sprites/portrait_background.png);
+  background-image: url(sprites/portrait_background.png);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,35 +116,35 @@ body {
 }
 
 .red-bar .bar-start {
-  background-image: url(/sprites/red_bar_start.png);
+  background-image: url(sprites/red_bar_start.png);
 }
 
 .red-bar .bar-end {
-  background-image: url(/sprites/red_bar_end.png);
+  background-image: url(sprites/red_bar_end.png);
 }
 
 .red-bar .bar-filled {
-  background-image: url(/sprites/red_bar_filled.png);
+  background-image: url(sprites/red_bar_filled.png);
 }
 
 .red-bar .bar-empty {
-  background-image: url(/sprites/red_bar_empty.png);
+  background-image: url(sprites/red_bar_empty.png);
 }
 
 .gold-bar .bar-start {
-  background-image: url(/sprites/gold_bar_start.png);
+  background-image: url(sprites/gold_bar_start.png);
 }
 
 .gold-bar .bar-end {
-  background-image: url(/sprites/gold_bar_end.png);
+  background-image: url(sprites/gold_bar_end.png);
 }
 
 .gold-bar .bar-filled {
-  background-image: url(/sprites/gold_bar_filled.png);
+  background-image: url(sprites/gold_bar_filled.png);
 }
 
 .gold-bar .bar-empty {
-  background-image: url(/sprites/gold_bar_empty.png);
+  background-image: url(sprites/gold_bar_empty.png);
 }
 
 .hud-item-slot {
@@ -155,17 +155,17 @@ body {
   align-items: center;
   justify-content: center;
   margin: 8px;
-  background-image: url(/sprites/item_slot_empty.png);
+  background-image: url(sprites/item_slot_empty.png);
 }
 
 .hud-item-slot[data-active=true] {
-  background-image: url(/sprites/item_slot_active.png);
+  background-image: url(sprites/item_slot_active.png);
 }
 
 .hud-item {
   width: 16px;
   height: 16px;
-  background: url(/sprites/atlas.png);
+  background: url(sprites/atlas.png);
   transform: scale(3);
 }
 
@@ -218,7 +218,7 @@ body {
 }
 
 .panel {
-  border-image: url(/sprites/dark_paper.png) 9 fill;
+  border-image: url(sprites/dark_paper.png) 9 fill;
   border-image-width: 9px;
   border-image-outset: 9px;
   color: #9699b7;
@@ -249,21 +249,21 @@ body {
 input {
   font: inherit;
   border: 0;
-  border-image: url(/sprites/input.png) 3 fill;
+  border-image: url(sprites/input.png) 3 fill;
   border-image-width: 3px;
   border-image-outset: 3px;
   color: white;
   margin: 3px;
   caret-color: #9599b7;
-  cursor: url(/sprites/cursor_text.png) 12 15, none;
+  cursor: url(sprites/cursor_text.png) 12 15, none;
 }
 
 button, a, label {
-  cursor: url(/sprites/cursor_pointer.png) 9 3, none;
+  cursor: url(sprites/cursor_pointer.png) 9 3, none;
 }
 
 input:focus {
-  border-image: url(/sprites/input_focus.png) 3 fill;
+  border-image: url(sprites/input_focus.png) 3 fill;
   border-image-width: 3px;
   border-image-outset: 3px;
   outline: transparent;
@@ -275,27 +275,27 @@ input::selection {
 }
 
 [data-cursor=crosshair] {
-  cursor: url(/sprites/cursor_crosshair.png) 16 16, none;
+  cursor: url(sprites/cursor_crosshair.png) 16 16, none;
 }
 
 [data-cursor=drag] {
-  cursor: url(/sprites/cursor_drag.png) 9 3, none;
+  cursor: url(sprites/cursor_drag.png) 9 3, none;
 }
 
 [data-cursor=dragging] {
-  cursor: url(/sprites/cursor_dragging.png) 9 3, none;
+  cursor: url(sprites/cursor_dragging.png) 9 3, none;
 }
 
 [data-cursor=help] {
-  cursor: url(/sprites/cursor_help.png) 9 3, none;
+  cursor: url(sprites/cursor_help.png) 9 3, none;
 }
 
 [data-cursor=not-allowed] {
-  cursor: url(/sprites/cursor_not_allowed.png) 15 15, none;
+  cursor: url(sprites/cursor_not_allowed.png) 15 15, none;
 }
 
 [data-cursor=pointer] {
-  cursor: url(/sprites/cursor_pointer.png) 9 3, none;
+  cursor: url(sprites/cursor_pointer.png) 9 3, none;
 }
 
 .overlay {
@@ -317,7 +317,7 @@ input[type=checkbox] {
 
 input[type=checkbox] + label:before {
   content: "";
-  background-image: url(/sprites/checkbox_unchecked.png);
+  background-image: url(sprites/checkbox_unchecked.png);
   width: 15px;
   height: 15px;
   display: inline-block;
@@ -325,7 +325,7 @@ input[type=checkbox] + label:before {
 }
 
 input[type=checkbox]:checked + label:before {
-  background-image: url(/sprites/checkbox_checked.png);
+  background-image: url(sprites/checkbox_checked.png);
 }
 
 input[type=radio] {
@@ -334,7 +334,7 @@ input[type=radio] {
 
 input[type=radio] + label:before {
   content: "";
-  background-image: url(/sprites/radio_unchecked.png);
+  background-image: url(sprites/radio_unchecked.png);
   width: 15px;
   height: 15px;
   display: inline-block;
@@ -342,5 +342,5 @@ input[type=radio] + label:before {
 }
 
 input[type=radio]:checked + label:before {
-  background-image: url(/sprites/radio_checked.png);
+  background-image: url(sprites/radio_checked.png);
 }

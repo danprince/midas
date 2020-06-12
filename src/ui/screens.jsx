@@ -186,7 +186,7 @@ export function GameScreen() {
           <div class="hud-top-right">
             <div class="hud-stats">
               <div class="hud-stat">
-                <img src="/sprites/icon_coin.png" />
+                <img src="sprites/icon_coin.png" />
                 <span id="hud-coins-label" class="outline">
                   {game.player.coins}
                 </span>

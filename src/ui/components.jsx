@@ -80,7 +80,7 @@ export function SanityPortrait({ sanity, maxSanity }) {
 
   return (
     <div class="hud-portrait">
-      <img src={`/sprites/midas_face_${index}.png`} />
+      <img src={`sprites/midas_face_${index}.png`} />
     </div>
   );
 }
