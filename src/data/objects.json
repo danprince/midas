@@ -55,8 +55,11 @@
   "column": {
     "extends": ["large"],
     "sprite": 32,
-    "canBePushed": true,
     "canBeTransmuted": true
+  },
+  "doric-column": {
+    "extends": ["column"],
+    "sprite": 38
   },
   "wall": {
     "extends": ["large"],
@@ -145,5 +148,50 @@
   },
   "magic-trap": {
     "sprite": 140
+  },
+  "ladon": {
+    "extends": ["large", "serpent"],
+    "health": 50,
+    "maxHealth": 50,
+    "sprite": 56
+  },
+  "automaton": {
+    "extends": ["large", "monster"],
+    "health": 100,
+    "maxHealth": 100,
+    "sprite": 58
+  },
+  "amazon": {
+    "extends": ["human"],
+    "sprite": 76
+  },
+  "centaur": {
+    "extends": ["human"],
+    "sprite": 94
+  },
+  "barrel": {
+    "sprite": 141
+  },
+  "candle": {
+    "sprite": 142
+  },
+  "vase": {
+    "sprite": 143,
+    "canBeTransmuted": true
+  },
+  "altar": {
+    "h": 2
+  },
+  "altar-1": {
+    "extends": ["altar"],
+    "sprite": 147
+  },
+  "altar-2": {
+    "extends": ["altar"],
+    "sprite": 148
+  },
+  "altar-3": {
+    "extends": ["altar"],
+    "sprite": 149
   }
 }

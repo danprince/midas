@@ -17,27 +17,15 @@ export function empty() {
 }
 
 export function sandbox() {
-  let stage = new Stage(10, 10, 20);
+  let stage = new Stage(15, 15, 20);
 
-  // Random pattern in the map tiles
   for (let x = 0; x < stage.width; x++) {
     for (let y = 0; y < stage.height; y++) {
       // Chessboard
       if (x % 2 ? y % 2 : !(y % 2)) {
         stage.setTile(x, y, 24);
       }
-
-      // Random tiles
-      //if (Math.random() > 0.5) {
-      //  stage.setTile(x, y, 22);
-      //}
     }
-  }
-
-  for (let i = 0; i < 3; i++) {
-    let x = RNG.int(0, stage.width);
-    let y = RNG.int(0, stage.height);
-    stage.spawn("coins", x, y);
   }
 
   for (let i = 0; i < 10; i++) {
@@ -60,10 +48,22 @@ export function sandbox() {
 
   stage.spawn("upstairs", 5, 5);
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 20; i++) {
     let id = RNG.item(
       "cyclops", "lamia", "faun", "philosopher", "scholar", "hoplite",
-      "hoplite-spearman"
+      "hoplite-spearman", "hydra", "snake", "hydra-head", "ladon",
+      "automaton", "amazon", "centaur"
+    );
+
+    let x = RNG.int(0, stage.width);
+    let y = RNG.int(0, stage.height);
+
+    stage.spawn(id, x, y);
+  }
+
+  for (let i = 0; i < 20; i++) {
+    let id = RNG.item(
+      "doric-column", "barrel", "candle", "vase", "altar-1"
     );
 
     let x = RNG.int(0, stage.width);
