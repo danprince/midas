@@ -1,4 +1,4 @@
-import { Easing, Direction } from "silmarils";
+import { Easing, Direction, Vector } from "silmarils";
 import { useEffect, useState } from "preact/hooks";
 import { useUI, useInputHandler, useSync } from "./context.jsx";
 import { Renderer, Link, SanityPortrait, HudBar, HudItemSlot, GridCellContextMenu, Panel, Overlay } from "./components.jsx";
@@ -134,7 +134,7 @@ export function GameScreen() {
       }
 
       if (event.type === "mousedown") {
-        let vector = [x - game.camera.x, y - game.camera.y];
+        let vector = Vector.from(x - game.camera.x, y - game.camera.y);
         let direction = Direction.cardinalFromVector(vector);
         game.dispatch(Commands.move, direction);
       }
