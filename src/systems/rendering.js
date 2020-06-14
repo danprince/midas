@@ -224,7 +224,11 @@ export class RenderingSystem extends System {
     }
 
     if (object.shadow) {
-      this.drawSprite(14, object.x, object.y - 0.1);
+      if (object.extends.includes("large")) {
+        this.drawSprite(11, object.x, object.y - 0.1);
+      } else {
+        this.drawSprite(10, object.x, object.y - 0.1);
+      }
     }
 
     ctx.save();
@@ -243,11 +247,11 @@ export class RenderingSystem extends System {
 
     if (object.health) {
       this.renderBar(
-        object === game.player ? 16 : 15,
+        15,
         object.health,
         object.maxHealth,
         object.x + 0.5,
-        object.y - h + 0.75,
+        object.y - h + 0.5,
         object.h > 1 ? 24 : 16,
         3,
       );

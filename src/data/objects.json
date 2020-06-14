@@ -82,6 +82,7 @@
   },
   "gorgon": {
     "extends": ["large", "monster"],
+    "canJump": false,
     "health": 30,
     "maxHealth": 30
   },
@@ -123,5 +124,26 @@
   "hoplite-spearman": {
     "extends": ["hoplite"],
     "sprite": 92
+  },
+  "serpent": {
+    "extends": ["monster"],
+    "canJump": false
+  },
+  "hydra": {
+    "extends": ["large", "serpent"],
+    "health": 20,
+    "maxHealth": 20,
+    "sprite": 54
+  },
+  "snake": {
+    "extends": ["serpent"],
+    "sprite": 100
+  },
+  "hydra-head": {
+    "extends": ["serpent"],
+    "sprite": 102
+  },
+  "magic-trap": {
+    "sprite": 140
   }
 }
