@@ -61,7 +61,6 @@ export class TransmutationSystem {
     // Golden statues can be pushed if they were originally mobile.
     // Don't want transmuted walls to become pushable though
     if (object.mobile) {
-      object.mobile = false;
       object.canBePushed = true;
     }
 
