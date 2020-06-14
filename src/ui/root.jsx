@@ -30,8 +30,12 @@ export function mount() {
   let initialScreen = <MainMenuScreen />;
 
   if (hasSave()) {
-    load();
-    initialScreen = <GameScreen />;
+    try {
+      load();
+      initialScreen = <GameScreen />;
+    } catch (err) {
+      console.error("could not load save", err);
+    }
   }
 
   render(
