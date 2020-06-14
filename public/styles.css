@@ -256,6 +256,7 @@ input {
   margin: 3px;
   caret-color: #9599b7;
   cursor: url(sprites/cursor_text.png) 12 15, none;
+  background: transparent;
 }
 
 button, a, label {
@@ -318,8 +319,8 @@ input[type=checkbox] {
 input[type=checkbox] + label:before {
   content: "";
   background-image: url(sprites/checkbox_unchecked.png);
-  width: 15px;
-  height: 15px;
+  width: 21px;
+  height: 21px;
   display: inline-block;
   margin-right: 8px;
 }
@@ -335,8 +336,8 @@ input[type=radio] {
 input[type=radio] + label:before {
   content: "";
   background-image: url(sprites/radio_unchecked.png);
-  width: 15px;
-  height: 15px;
+  width: 21px;
+  height: 21px;
   display: inline-block;
   margin-right: 8px;
 }
