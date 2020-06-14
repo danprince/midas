@@ -20,9 +20,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <Fragment>
       {screens}
-    </>
+    </Fragment>
   );
 }
 

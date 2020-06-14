@@ -79,7 +79,7 @@ function shallowEqual(xs, ys) {
 
 /**
  * @param {object} props
- * @param {any} props.children
+ * @param {any} [props.children]
  * @param {JSXElement} props.initialScreen
  */
 export function Provider({ children, initialScreen }) {
@@ -138,8 +138,9 @@ export function Provider({ children, initialScreen }) {
   };
 
   return (
-    <UIContext.Provider value={context}>
-      {children}
-    </UIContext.Provider>
+    <UIContext.Provider
+      value={context}
+      children={children}
+    />
   );
 }

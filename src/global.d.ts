@@ -4,6 +4,10 @@ declare var game: import("./game").Game;
 
 declare var systems: (typeof import("./index"))["systems"];
 
+// Vite provides these automatically
+declare var h: typeof import("preact").h;
+declare var Fragment: typeof import("preact").Fragment;
+
 declare interface GameObject {
   extends?: string[],
   id: number,
@@ -106,7 +110,7 @@ declare interface TweenState {
 declare interface TweenParams<State extends TweenState> {
   from: State,
   to: State,
-  easing: Easing | Record<keyof State, Easing>,
+  easing?: Easing | Record<keyof State, Easing>,
   duration: number,
   step(state: State): void,
   done?(): void,

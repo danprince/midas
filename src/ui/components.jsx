@@ -35,7 +35,7 @@ export function Renderer() {
  * @param {object} props
  * @param {preact.ComponentType} props.to
  * @param {boolean} [props.push]
- * @param {any} props.children
+ * @param {any} [props.children]
  * @param {any} [props.onClick]
  */
 export function Link({ to, push, children, onClick }) {
@@ -62,6 +62,11 @@ export function Link({ to, push, children, onClick }) {
   )
 }
 
+/**
+ * @param {object} props
+ * @param {number} props.sanity
+ * @param {number} props.maxSanity
+ */
 export function SanityPortrait({ sanity, maxSanity }) {
   let percent = sanity / maxSanity;
   let index = 1;
@@ -85,6 +90,13 @@ export function SanityPortrait({ sanity, maxSanity }) {
   );
 }
 
+/**
+ * @param {object} props
+ * @param {string} props.color
+ * @param {number} props.value
+ * @param {number} props.max
+ * @param {any} [props.children]
+ */
 export function HudBar({ color, value, max, children }) {
   let percent = value / max * 100;
 
@@ -125,6 +137,12 @@ export function HudItemSlot({ sprite, label, active, onClick }) {
   );
 }
 
+/**
+ * @param {object} props
+ * @param {number} props.x
+ * @param {number} props.y
+ * @param {any} [props.children]
+ */
 export function GridAnchor({ x, y, children }) {
   let gridCoords = game.camera.gridToScreen(x, y);
 
@@ -140,7 +158,7 @@ export function GridAnchor({ x, y, children }) {
 
 /**
  * @param {object} props
- * @param {any} props.children
+ * @param {any} [props.children]
  * @param {(event: MouseEvent) => any} [props.onRequestClose]
  */
 export function ContextMenu({ children, onRequestClose }) {
@@ -153,7 +171,7 @@ export function ContextMenu({ children, onRequestClose }) {
 
 /**
  * @param {object} props
- * @param {any} props.children
+ * @param {any} [props.children]
  * @param {any} [props.items]
  * @param {(event: MouseEvent) => any} [props.onClick]
  */
@@ -183,6 +201,12 @@ export function ContextMenuDivider() {
   );
 }
 
+/**
+ * @param {object} props
+ * @param {number} props.x
+ * @param {number} props.y
+ * @param {() => any} [props.onRequestClose]
+ */
 export function GridCellContextMenu({ x, y, onRequestClose }) {
   let object = game.stage.getObjectAt(x, y);
 
@@ -225,6 +249,10 @@ export function GridCellContextMenu({ x, y, onRequestClose }) {
   );
 }
 
+/**
+ * @param {object} props
+ * @param {any} [props.children]
+ */
 export function Panel({ children }) {
   return (
     <div class="panel">
@@ -233,6 +261,10 @@ export function Panel({ children }) {
   );
 }
 
+/**
+ * @param {object} props
+ * @param {any} [props.children]
+ */
 export function Overlay({ children }) {
   let container = document.getElementById("portal");
 
