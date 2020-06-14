@@ -59,6 +59,12 @@ export class Stage {
    * @param {number} y
    */
   add(object, x = object.x, y = object.y) {
+    let existingObject = this.getObjectAt(x, y);
+
+    if (existingObject) {
+      this.remove(existingObject);
+    }
+
     object.x = x;
     object.y = y;
     this.objects.push(object);
