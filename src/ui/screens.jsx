@@ -121,6 +121,22 @@ export function GameScreen() {
         case config.keyItem3:
           game.dispatch(Commands.setActiveItem, 2);
           break;
+        default:
+          return false;
+      }
+    }
+
+    if (event instanceof MouseEvent) {
+      let { x, y } = game.camera.screenToGrid(event.clientX, event.clientY);
+
+      if (x === game.player.x && y === game.player.y) {
+        return;
+      }
+
+      if (event.type === "mousedown") {
+        let vector = [x - game.camera.x, y - game.camera.y];
+        let direction = Direction.cardinalFromVector(vector);
+        game.dispatch(Commands.move, direction);
       }
     }
 
