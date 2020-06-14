@@ -87,6 +87,7 @@
   },
   "medusa": {
     "extends": ["gorgon"],
+    "ai": "medusa",
     "sprite": 50
   },
   "cyclops": {
