@@ -257,6 +257,18 @@ export class RenderingSystem extends System {
       );
     }
 
+    if (object.maxSanity) {
+      this.renderBar(
+        17,
+        object.sanity,
+        object.maxSanity,
+        object.x + 0.5,
+        object.y - h + 0.3,
+        object.h > 1 ? 24 : 16,
+        3,
+      );
+    }
+
     ctx.restore();
   }
 
