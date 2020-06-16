@@ -164,6 +164,8 @@ export class RenderingSystem extends System {
     this.renderParticles();
 
     ctx.restore();
+
+    this.drawDebugMinimap();
   }
 
   clear() {
@@ -352,6 +354,31 @@ export class RenderingSystem extends System {
       if (Rectangle.contains(this.viewport, particle)) {
         ctx.globalAlpha = particle.alpha;
         this.drawSprite(particle.sprite, particle.x, particle.y, particle.w, particle.h);
+      }
+    }
+
+    ctx.restore();
+  }
+
+  drawDebugMinimap() {
+    let ctx = this.ctx;
+
+    ctx.save();
+    ctx.translate(0, this.canvas.height);
+    ctx.scale(2, 2);
+    ctx.translate(0, -game.stage.height)
+
+    for (let x = 0; x < game.stage.width; x++) {
+      for (let y = 0; y < game.stage.height; y++) {
+        let tile = game.stage.getTile(x, y);
+
+        if (tile >= 20 && tile <= 30) {
+          ctx.fillStyle = "#1a1b2d";
+        } else {
+          continue;
+        }
+
+        ctx.fillRect(x, y, 1, 1);
       }
     }
 
