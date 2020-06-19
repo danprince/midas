@@ -9,13 +9,19 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("keydown", dispatch);
+    window.addEventListener("keyup", dispatch);
     window.addEventListener("mousemove", dispatch);
     window.addEventListener("mousedown", dispatch);
+    window.addEventListener("mouseup", dispatch);
+    window.addEventListener("click", dispatch);
 
     return () => {
       window.removeEventListener("keydown", dispatch);
+      window.removeEventListener("keyup", dispatch);
       window.removeEventListener("mousemove", dispatch);
       window.removeEventListener("mousedown", dispatch);
+      window.removeEventListener("mouseup", dispatch);
+      window.removeEventListener("click", dispatch);
     };
   }, [dispatch]);
 
