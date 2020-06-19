@@ -1,5 +1,5 @@
 import { createContext } from "preact";
-import { useState, useContext, useEffect, useRef, useReducer } from "preact/hooks";
+import { useState, useContext, useEffect, useRef } from "preact/hooks";
 
 /**
  * @type {preact.Context<UIContext>}
@@ -113,7 +113,7 @@ export function Provider({ children, initialScreen }) {
     },
 
     addInputListener(callback) {
-      inputListenersRef.current.push(callback);
+      inputListenersRef.current.unshift(callback);
     },
 
     removeInputListener(callback) {
