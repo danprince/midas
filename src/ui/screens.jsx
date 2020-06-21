@@ -94,7 +94,7 @@ export function GameScreen() {
   }, []);
 
   useInputHandler(event => {
-    if (event instanceof KeyboardEvent) {
+    if (event instanceof KeyboardEvent && event.type === "keydown") {
       switch (event.key) {
         case config.keyCancel:
           save();
