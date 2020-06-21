@@ -34,4 +34,13 @@ export class CameraSystem extends System {
       });
     }
   }
+
+  updateImmediate() {
+    if (this.target == null) {
+      return;
+    }
+
+    game.camera.x = this.target.x + 0.5;
+    game.camera.y = this.target.y + 0.5;
+  }
 }

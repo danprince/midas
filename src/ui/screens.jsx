@@ -24,7 +24,6 @@ export function MainMenuScreen() {
     game.stage = LevelBuilder.build("gordion-citadel");
     game.player = ObjectBuilder.build("midas");
     game.stage.add(game.player, 0, 0);
-    systems.camera.target = game.player;
     game.player.items = [ItemBuilder.build("sword")];
 
     // Drop midas in from above the map
@@ -40,13 +39,16 @@ export function MainMenuScreen() {
         systems.transmutation.transmuteTile(0, 0)
       }
     });
+
+    systems.camera.target = game.player;
+    systems.camera.updateImmediate();
   }
 
   return (
     <div class="screen main-menu">
       <Panel>
         <div style="display: flex; flex-direction: column; text-align: center">
-          <Link to={GameScreen} onClick={loadGame}>Continue</Link>
+          {hasSave() && <Link to={GameScreen} onClick={loadGame}>Continue</Link>}
           <Link to={GameScreen} onClick={newGame}>New Game</Link>
           <Link to={SettingsScreen}>Settings</Link>
         </div>
