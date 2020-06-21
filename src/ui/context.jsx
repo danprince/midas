@@ -137,6 +137,9 @@ export function Provider({ children, initialScreen }) {
     },
   };
 
+  // Provide globally for game code that needs it
+  window.ui = context;
+
   return (
     <UIContext.Provider
       value={context}

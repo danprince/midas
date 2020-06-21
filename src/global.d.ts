@@ -5,6 +5,8 @@ declare var game: import("./game").Game;
 
 declare var systems: (typeof import("./index"))["systems"];
 
+declare var ui: UIContext;
+
 // Vite provides these automatically
 declare var h: typeof import("preact").h;
 declare var Fragment: typeof import("preact").Fragment;
