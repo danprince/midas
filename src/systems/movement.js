@@ -31,6 +31,12 @@ export class MovementSystem {
       return false;
     }
 
+    let tile = game.stage.getTile(tx, ty);
+
+    if (tile === 0) {
+      return false;
+    }
+
     let target = game.stage.getObjectAt(tx, ty);
 
     if (
