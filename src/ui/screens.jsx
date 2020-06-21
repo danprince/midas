@@ -133,14 +133,17 @@ export function GameScreen() {
       let { x, y } = game.camera.screenToGrid(event.clientX, event.clientY);
 
       if (x === game.player.x && y === game.player.y) {
-        return;
+        return false;
       }
 
-      if (event.type === "mousedown") {
+      if (event.type === "click") {
         let vector = Vector.from(x - game.camera.x, y - game.camera.y);
         let direction = Direction.cardinalFromVector(vector);
         game.dispatch(Commands.move, direction);
+        return true;
       }
+
+      return false;
     }
 
     return true;
