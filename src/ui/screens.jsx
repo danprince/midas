@@ -10,7 +10,6 @@ import * as Levels from "../levels.js";
 import * as Commands from "../commands.js";
 import * as ObjectBuilder from "../builders/object-builder.js";
 import * as ItemBuilder from "../builders/item-builder.js";
-import * as LevelBuilder from "../builders/level-builder.js";
 
 export function MainMenuScreen() {
   let { setScreen } = useUI();
@@ -21,7 +20,7 @@ export function MainMenuScreen() {
 
   function newGame() {
     game = new Game();
-    game.stage = LevelBuilder.build("gordion-citadel");
+    game.stage = Levels.sandbox();
     game.player = ObjectBuilder.build("midas");
     game.stage.add(game.player, 0, 0);
     game.player.items = [ItemBuilder.build("sword")];
