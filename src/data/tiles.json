@@ -1,0 +1,33 @@
+{
+  "void": {
+    "extends": [],
+    "sprite": 0,
+    "height": 1,
+    "walkable": false,
+    "transmutable": false
+  },
+  "floor": {
+    "extends": [],
+    "walkable": true,
+    "transmutable": true,
+    "height": 1
+  },
+  "wall": {
+    "extends": [],
+    "walkable": false,
+    "transmutable": true,
+    "height": 2
+  },
+  "stone-floor": {
+    "extends": ["floor"],
+    "sprite": 20,
+    "autotiling": {
+      "type": "chessboard",
+      "sprite": 24
+    }
+  },
+  "stone-wall": {
+    "extends": ["wall"],
+    "sprite": 18
+  }
+}
