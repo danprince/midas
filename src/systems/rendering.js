@@ -158,19 +158,6 @@ export class RenderingSystem extends System {
     // Only need to calculate the current viewport once per render
     this.viewport = this.calculateViewport();
 
-    this.renderTiles();
-    this.renderObjects();
-    this.renderAnimations();
-    this.renderParticles();
-
-    ctx.restore();
-  }
-
-  clear() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
-  renderTiles() {
     let x0 = this.viewport.x;
     let y0 = this.viewport.y;
     let x1 = x0 + this.viewport.width;
@@ -180,32 +167,23 @@ export class RenderingSystem extends System {
       for (let x = x0; x < x1; x++) {
         let tile = game.stage.getTile(x, y);
         this.drawSprite(tile.sprite, x, y, 1, tile.height);
-      }
-    }
-  }
 
-  renderObjects() {
-    let objectsByRow = {};
+        let object = game.stage.getObjectAt(x, y);
 
-    for (let object of game.stage.objects) {
-      if (Rectangle.contains(this.viewport, object)) {
-        objectsByRow[object.y] = objectsByRow[object.y] || [];
-        objectsByRow[object.y].push(object);
-      }
-    }
-
-    let y0 = this.viewport.y;
-    let y1 = y0 + this.viewport.height;
-
-    for (let y = y0; y < y1; y++) {
-      let objects = objectsByRow[y];
-
-      if (objects) {
-        for (let object of objects) {
+        if (object) {
           this.renderObject(object);
         }
       }
     }
+
+    this.renderAnimations();
+    this.renderParticles();
+
+    ctx.restore();
+  }
+
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   /**
