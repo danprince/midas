@@ -41,6 +41,7 @@ export function MainMenuScreen() {
 
     systems.camera.target = game.player;
     systems.camera.updateImmediate();
+    systems.autotiling.update();
   }
 
   return (
