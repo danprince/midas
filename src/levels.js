@@ -2,47 +2,39 @@ import { RNG } from "silmarils";
 import { Stage } from "./stage.js";
 
 export function empty() {
-  let stage = new Stage(10, 10, 20);
-
-  // Random pattern in the map tiles
-  for (let x = 0; x < stage.width; x++) {
-    for (let y = 0; y < stage.height; y++) {
-      if (Math.random() > 0.5) {
-        stage.setTile(x, y, 22);
-      }
-    }
-  }
+  let stage = new Stage(10, 10, "stone-floor");
 
   return stage;
 }
 
 export function sandbox() {
-  let stage = new Stage(15, 15, 20);
+  let stage = new Stage(15, 15, "stone-floor");
 
   for (let x = 0; x < stage.width; x++) {
-    for (let y = 0; y < stage.height; y++) {
-      // Chessboard
-      if (x % 2 ? y % 2 : !(y % 2)) {
-        stage.setTile(x, y, 24);
-      }
-    }
+    stage.setTileType(x, 0, "stone-wall");
+    stage.setTileType(x, stage.height - 1, "stone-wall");
+  }
+
+  for (let y = 0; y < stage.height; y++) {
+    stage.setTileType(0, y, "stone-wall");
+    stage.setTileType(stage.width - 1, y, "stone-wall");
   }
 
   for (let i = 0; i < 10; i++) {
-    let x = RNG.int(0, stage.width);
-    let y = RNG.int(0, stage.height);
+    let x = RNG.int(1, stage.width - 1);
+    let y = RNG.int(1, stage.height - 1);
     stage.spawn("column", x, y);
   }
 
   for (let i = 0; i < 10; i++) {
-    let x = RNG.int(0, stage.width);
-    let y = RNG.int(0, stage.height);
+    let x = RNG.int(1, stage.width - 1);
+    let y = RNG.int(1, stage.height - 1);
     stage.spawn("block", x, y);
   }
 
   for (let i = 0; i < 10; i++) {
-    let x = RNG.int(0, stage.width);
-    let y = RNG.int(0, stage.height);
+    let x = RNG.int(1, stage.width - 1);
+    let y = RNG.int(1, stage.height - 1);
     stage.spawn("wall", x, y);
   }
 
@@ -55,8 +47,8 @@ export function sandbox() {
       "automaton", "amazon", "centaur"
     );
 
-    let x = RNG.int(0, stage.width);
-    let y = RNG.int(0, stage.height);
+    let x = RNG.int(1, stage.width - 1);
+    let y = RNG.int(1, stage.height - 1);
 
     stage.spawn(id, x, y);
   }
@@ -66,8 +58,8 @@ export function sandbox() {
       "doric-column", "barrel", "candle", "vase", "altar-1"
     );
 
-    let x = RNG.int(0, stage.width);
-    let y = RNG.int(0, stage.height);
+    let x = RNG.int(1, stage.width - 1);
+    let y = RNG.int(1, stage.height - 1);
 
     stage.spawn(id, x, y);
   }

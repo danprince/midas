@@ -63,7 +63,7 @@ export class Game {
     this.objectId = save.objectId;
     this.commands = save.commands;
 
-    this.stage = new Stage(save.stage.width, save.stage.height, 0);
+    this.stage = new Stage(save.stage.width, save.stage.height);
     this.stage.tiles = save.stage.tiles;
     this.stage.objects = save.stage.objects;
     this.stage.updateObjectIndexes();

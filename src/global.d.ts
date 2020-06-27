@@ -131,7 +131,7 @@ declare interface Save {
   stage: {
     width: number,
     height: number,
-    tiles: number[],
+    tiles: Tile[],
     objects: GameObject[],
   },
 }
@@ -157,6 +157,9 @@ declare interface Tile {
   height: number,
   walkable?: boolean,
   transmutable?: boolean,
+  transmuted?: boolean,
+  autotiling?:
+    | { type: "chessboard", sprite: number }
 }
 
 declare type ObjectTemplate = Partial<GameObject>;

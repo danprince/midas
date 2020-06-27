@@ -7,7 +7,6 @@ export class MovementSystem {
    * @return {boolean} Did the object move successfully?
    */
   move(object, direction) {
-
     let [dx, dy] = Direction.toVector(direction);
 
     let tx = object.x + dx;
@@ -33,8 +32,17 @@ export class MovementSystem {
 
     let tile = game.stage.getTile(tx, ty);
 
-    if (tile === 0) {
+    if (tile == null) {
       return false;
+    }
+
+    if (!tile.walkable) {
+      if (object.canTransmute && tile.transmutable) {
+        systems.transmutation.transmuteTile(tx, ty, object);
+        return true;
+      } else {
+        return false;
+      }
     }
 
     let target = game.stage.getObjectAt(tx, ty);
@@ -97,7 +105,7 @@ export class MovementSystem {
       done() {
         object.jump = 0;
 
-        if (object.canTransmute) {
+        if (object.canTransmute && tile.transmutable) {
           systems.transmutation.transmuteTile(tx, ty, object);
         }
       },

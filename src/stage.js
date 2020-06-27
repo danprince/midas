@@ -1,12 +1,13 @@
-import { build } from "./builders/object-builder.js";
+import * as ObjectBuilder from "./builders/object-builder.js";
+import * as TileBuilder from "./builders/tile-builder.js";
 
 export class Stage {
   /**
    * @param {number} width
    * @param {number} height
-   * @param {number} tile
+   * @param {string} [tileType]
    */
-  constructor(width, height, tile) {
+  constructor(width, height, tileType) {
     /**
      * @readonly
      * @type {number}
@@ -20,9 +21,11 @@ export class Stage {
     this.height = height;
 
     /**
-     * @type {number[]}
+     * @type {Tile[]}
      */
-    this.tiles = Array.from({ length: width * height }).fill(tile);
+    this.tiles = tileType
+      ? Array.from({ length: width * height }, () => TileBuilder.build(tileType))
+      : Array.from({ length: width * height });
 
     /**
      * @type {GameObject[]}
@@ -48,7 +51,7 @@ export class Stage {
    * @param {number} y
    */
   spawn(id, x, y) {
-    let object = build(id);
+    let object = ObjectBuilder.build(id);
     this.add(object, x, y);
     return object;
   }
@@ -84,7 +87,17 @@ export class Stage {
   /**
    * @param {number} x
    * @param {number} y
-   * @param {number} tile
+   * @param {string} type
+   */
+  setTileType(x, y, type) {
+    let tile = TileBuilder.build(type);
+    this.setTile(x, y, tile);
+  }
+
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @param {Tile} tile
    */
   setTile(x, y, tile) {
     if (x >= 0 && y >= 0 && x < this.width && y < this.height) {
@@ -95,7 +108,7 @@ export class Stage {
   /**
    * @param {number} x
    * @param {number} y
-   * @return {number}
+   * @return {Tile}
    */
   getTile(x, y) {
     if (x >= 0 && y >= 0 && x < this.width && y < this.height) {

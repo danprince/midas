@@ -9,15 +9,9 @@ export class TransmutationSystem {
   transmuteTile(x, y, transmuter) {
     let tile = game.stage.getTile(x, y);
 
-    switch (tile) {
-      case 20:
-      case 22:
-      case 24:
-      case 26:
-        game.stage.setTile(x, y, tile + 1);
-        break;
-      default:
-        return;
+    if (!tile.transmuted) {
+      tile.transmuted = true;
+      tile.sprite += 1;
     }
 
     if (transmuter) {
