@@ -151,67 +151,24 @@ declare interface UIContext {
   dispatch(event: Event): void
 }
 
+declare interface Tile {
+  extends?: [],
+  sprite: number,
+  height: number,
+  walkable?: boolean,
+  transmutable?: boolean,
+}
+
 declare type ObjectTemplate = Partial<GameObject>;
 
 declare type ItemTemplate = Partial<Item>;
 
-declare interface LevelTemplate {
-  minRooms: number,
-  maxRooms: number,
-  maxWidth: number,
-  minWidth: number,
-  maxHeight: number,
-  minHeight: number,
-  tags: string[],
-  legend?: LevelBuilderLegend,
+declare type TileTemplate = Partial<Tile>;
+
+declare interface DataTemplate {
+  extends?: string[],
 }
 
-declare interface RoomTemplate {
-  tags: string[],
-  layout: string[],
-}
-
-declare interface LevelBuilder {
-  template: LevelTemplate,
-  width: number,
-  height: number,
-  stage: import("./stage").Stage,
-  nodes: LevelBuilderNode[],
-  openEdges: LevelBuilderEdge[],
-  closedEdges: LevelBuilderEdge[],
-}
-
-interface LevelBuilderNode {
-  id: number,
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  tiles: number[],
-  edges: Point[],
-  placements: {
-    type: LevelBuilderPlacementType,
-    x: number,
-    y: number,
-  }[]
-}
-
-type LevelBuilderPlacementType =
-  | "edge"
-  | "object"
-  | "entrance"
-
-interface LevelBuilderLegend {
-  [char: string]: {
-    tile?: number,
-    type?: LevelBuilderPlacementType,
-    edge?: boolean,
-  }
-}
-
-interface LevelBuilderEdge {
-  from: number,
-  to: number,
-  x: number,
-  y: number,
+declare interface DataRegistry<T extends DataTemplate = DataTemplate> {
+  [id: string]: T
 }
