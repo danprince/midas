@@ -1,3 +1,8 @@
+declare module "*.json" {
+  let content: any;
+  export default content;
+}
+
 declare type Direction = import("silmarils/direction").CardinalDirection;
 declare type Point = import("silmarils/point").Point;
 
