@@ -12,8 +12,6 @@ import * as ObjectBuilder from "../builders/object-builder.js";
 import * as ItemBuilder from "../builders/item-builder.js";
 
 export function MainMenuScreen() {
-  let { setScreen } = useUI();
-
   function loadGame() {
     load();
   }
@@ -22,7 +20,7 @@ export function MainMenuScreen() {
     game = new Game();
     game.stage = Levels.sandbox();
     game.player = ObjectBuilder.build("midas");
-    game.stage.add(game.player, 0, 0);
+    game.stage.add(game.player, 5, 5);
     game.player.items = [ItemBuilder.build("sword")];
 
     // Drop midas in from above the map
@@ -35,7 +33,7 @@ export function MainMenuScreen() {
         game.player.jump = jump;
       },
       done() {
-        systems.transmutation.transmuteTile(0, 0)
+        systems.transmutation.transmuteTile(game.player.x, game.player.y);
       }
     });
 
