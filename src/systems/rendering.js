@@ -157,6 +157,7 @@ export class RenderingSystem extends System {
 
     // Only need to calculate the current viewport once per render
     this.viewport = this.calculateViewport();
+    let objectsByRow = this.getObjectsByRow();
 
     let x0 = this.viewport.x;
     let y0 = this.viewport.y;
@@ -164,13 +165,17 @@ export class RenderingSystem extends System {
     let y1 = y0 + this.viewport.height;
 
     for (let y = y0; y < y1; y++) {
+      // Draw tiles on this row first
       for (let x = x0; x < x1; x++) {
         let tile = game.stage.getTile(x, y);
         this.drawSprite(tile.sprite, x, y, 1, tile.height);
+      }
 
-        let object = game.stage.getObjectAt(x, y);
+      // Render all objects on this row
+      let objects = objectsByRow[y];
 
-        if (object) {
+      if (objects) {
+        for (let object of objects) {
           this.renderObject(object);
         }
       }
@@ -184,6 +189,36 @@ export class RenderingSystem extends System {
 
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  /**
+   * Group objects by their visual row.
+   *
+   * @private
+   * @return {Record<number, GameObject[]>}
+   */
+  getObjectsByRow() {
+    /**
+     * @type {Record<number, GameObject[]>}
+     */
+    let objectsByRow = {};
+
+    for (let object of game.stage.objects) {
+      if (Rectangle.contains(this.viewport, object)) {
+        let y = object.y;
+
+        if (object.offsetY) {
+          y += object.offsetY;
+        }
+
+        y = Math.ceil(y);
+
+        objectsByRow[y] = objectsByRow[y] || [];
+        objectsByRow[y].push(object);
+      }
+    }
+
+    return objectsByRow;
   }
 
   /**
